@@ -1,46 +1,81 @@
-# Getting Started with Create React App
+# OneStop 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+OneStop is a travel blogging application where users can post about their recent trips and share ideas of hot places to visit. It essentially is a place where folks come together and share, find, and discover their inner traveler!
 
-## Available Scripts
+## Course Details
+- **TITLE** ~ CS:5610 - Web Development
+- **FACULTY** ~ Dr. Jose Annunziato
+- **SEMESTER** ~ Fall 2024
+- **TEAM** ~ Aryan Mehta, Michael Lappas, Christopher Gormley, Phuong Linh Nguyen
 
-In the project directory, you can run:
+## Collaborators' Note
 
-### `npm start`
+To collaborate on this project, follow the steps below:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone this repository into your project folder by running
+\
+`git clone https://github.com/aryan-mehta05/onestop.git`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Next, run the following command to make sure you have all the required packages installed.
+\
+`npm install`
 
-### `npm test`
+3. Make sure the project runs using the following command
+\
+`npm start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
+#### Standard practices for collaborators
 
-### `npm run build`
+- **STEP 1** \
+***Before** making any changes at all to code files*, run \
+`npm install` \
+This makes sure that you have all the required packages installed that may have been installed by other collaborators to make changes.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **STEP 2** \
+Create a new branch called 'your-name' and only then start making any changes \
+`git checkout -b <your-name>` \
+*For example, if your name is Sam, then
+`git checkout -b sam`*
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **STEP 3** \
+Now work on your part of the project and make the updates/changes, making sure that it is **NOT** on the main branch. Make sure that it is in *YOUR BRANCH*.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **STEP 4** \
+Another collaborator may have pushed some changes while you were working on your part. If you do not have those files in your local folder, then there will be errors and conflict if you try to push your own changes. Hence, make sure that you pull the changes that have been made to the main branch.
 
-### `npm run eject`
+  - To do this, first check if your local repository is *behind* the main branch \
+  `git status`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  - If it is behind, then run \
+  `git pull`
+\
+*This makes sure that all the changes in the main branch are reflected in your local repository.*
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **STEP 5** \
+Now that the pull is made and your work is done, add, commit, and push it to the remote on your branch itself. \
+`git add .` \
+`git commit -m "Description of what you have worked on"` \
+`git push -u origin sam` (if your branch name is 'Sam')
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **STEP 6** \
+Wait for code review and see if any further changes or fixes are required to be made.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **STEP 7** \
+If you have made the fixes, or if no changes are required, then you can now finally delete your branch before further work. \
+`git checkout main` \
+`git branch -d sam`
 
-## Learn More
+- **STEP 8** \
+Finishing step 7 means that all your pushes have been successfully merged into the main branch, and now you can start to work a new part of the project. Hence, run these commands again. \
+`git pull` \
+`git checkout -b sam` \
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Once you've done this, it means you're at **Step 3** where you can again work on your new task. Steps 3-8 repeat until the project is completed.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+For the purposes of authenticity and integrity, this codebase remains the property of the members working on this project, hence any unauthorized copies of this codebase will be subject to the law.
+
+---
+© OneStop 2024.
