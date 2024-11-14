@@ -1,0 +1,26 @@
+[
+    {
+        "_id": "P1",
+        "user_id": "U1",
+        "time_posted": "2012-04-23T18:25:43.511Z",
+        "image": "../../images/palm-tree.jpg",
+        "caption": "Look at this palm tree!",
+        "likes": 5
+    }, 
+    {
+        "_id": "P2",
+        "user_id": "U2",
+        "time_posted": "2016-05-12T18:25:43.511Z",
+        "image": "../../images/palm-tree.jpg",
+        "caption": "Look at this palm tree!",
+        "likes": 10
+    },
+    {
+        "_id": "P3",
+        "user_id": "U2",
+        "time_posted": "2018-07-01T18:25:43.511Z",
+        "image": "../../images/palm-tree.jpg",
+        "caption": "Look at this palm tree!",
+        "likes": 2
+    }
+]
