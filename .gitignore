@@ -9,6 +9,9 @@
 *.env
 *.env.local
 
+# media files
+/public/assets/
+
 # testing
 /coverage
 
