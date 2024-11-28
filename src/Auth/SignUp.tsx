@@ -59,9 +59,23 @@ const SignUp: React.FC = () => {
         {errorMsg && <p className="text-red-500">{errorMsg}</p>}
         <button
           type="submit"
-          className="px-4 py-2 bg-green-500 text-white rounded"
+          className="px-4 py-2 bg-os-blue text-white rounded"
         >
           Sign Up
+        </button>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-os-darkblue text-white rounded"
+          onClick={() => navigate('/signin')}
+        >
+          Already have an account? Sign In
+        </button>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-os-yellow text-white rounded"
+          onClick={() => navigate('/')}
+        >
+          Back to Home Screen
         </button>
       </form>
     </div>

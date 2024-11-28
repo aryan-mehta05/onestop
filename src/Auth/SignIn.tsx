@@ -41,9 +41,23 @@ const SignIn = () => {
         {errorMsg && <p className="text-red-500">{errorMsg}</p>}
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className="px-4 py-2 bg-os-blue text-white rounded"
         >
           Sign In
+        </button>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-os-darkblue text-white rounded"
+          onClick={() => navigate('/signup')}
+        >
+          Don't have an account? Sign Up!
+        </button>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-os-yellow text-white rounded"
+          onClick={() => navigate('/')}
+        >
+          Back to Home Screen
         </button>
       </form>
     </div>

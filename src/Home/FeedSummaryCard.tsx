@@ -1,4 +1,5 @@
-// import { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // import { FiSend } from "react-icons/fi";
 // import { FaHeart } from "react-icons/fa6";
@@ -27,6 +28,9 @@ const FeedSummaryCard = ({
   views,
 }: FeedSummaryCardProps) => {
   // const [isLiked, setIsLiked] = useState<boolean>(false);
+  const isSignedIn = false;
+  const [isFollowing, setIsFollowing] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   function formatViews(views: number): string {
     if (views >= 1_000_000_000) {
@@ -97,8 +101,18 @@ const FeedSummaryCard = ({
                 <span className="text-md text-gray-300 ml-2">|</span>
               </div>
               <div>
-                <button className="bg-os-sky hover:bg-os-lightblue text-black px-3 font-semibold rounded-md">
-                  Follow
+                <button
+                  className={`px-3 font-semibold rounded-md text-black ${isFollowing ? "bg-os-yellow hover:bg-os-orange": "bg-os-sky hover:bg-os-lightblue"}`}
+                  onClick={() => {
+                    if (isSignedIn) {
+                      setIsFollowing(!isFollowing)
+                    } else {
+                      alert("You need to sign in for that!");
+                      navigate('/signin');
+                    }
+                  }}
+                >
+                  {isFollowing ? "Unfollow" : "Follow"}
                 </button>
               </div>
             </div>

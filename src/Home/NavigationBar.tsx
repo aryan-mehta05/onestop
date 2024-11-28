@@ -1,12 +1,12 @@
 import { TbLocationHeart } from "react-icons/tb";
 import { IoArrowForwardOutline } from "react-icons/io5";
 
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavigationBar = () => {
-  const isSignedIn = true;
+  const isSignedIn = false;
   const username = "Aryan";
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const navButtons = [
     {
@@ -41,7 +41,7 @@ const NavigationBar = () => {
             <button
               key={button.id}
               className="text-sm text-gray-200 tracking-wider hover:text-white uppercase font-light"
-              // onClick={() => navigate(button.link)}
+              onClick={() => navigate(button.link)}
             >
               {button.title}
             </button>
@@ -55,7 +55,7 @@ const NavigationBar = () => {
             <p className="font-bold tracking-wide text-white">
               Welcome, {username}!
             </p>
-            <button className="bg-os-red flex items-center gap-x-2 text-white px-3 py-2 rounded-md">
+            <button className="bg-os-red flex items-center gap-x-2 text-white px-3 py-2 rounded-md" onClick={() => navigate(`/feed`)}>
               Go to your feed
               <IoArrowForwardOutline className="w-4 h-4" />
             </button>
@@ -63,10 +63,10 @@ const NavigationBar = () => {
 
         ) : (
           <>
-            <button className="bg-os-red border border-os-red text-white px-3 py-2 rounded-md hover:scale-110 transition-transform">
+            <button className="bg-os-red border border-os-red text-white px-3 py-2 rounded-md hover:scale-110 transition-transform" onClick={() => navigate('/signin')}>
               Sign In
             </button>
-            <button className="bg-white border border-os-red text-os-red px-3 py-2 rounded-md hover:scale-110 transition-transform">
+            <button className="bg-white border border-os-red text-os-red px-3 py-2 rounded-md hover:scale-110 transition-transform" onClick={() => navigate('/signup')}>
               Sign Up
             </button>
           </>
