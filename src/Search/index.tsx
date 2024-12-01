@@ -33,7 +33,8 @@ export default function Search() {
                 <label htmlFor="max-price-input">Max Price (optional): </label>
                 <input id="max-price-input" type="number" onChange={(e) => setSearch_params({ ...search_params, max_price: parseInt(e.target.value) })} />
                 <br />
-                <button onClick={() => {
+                <button onClick={(e) => {
+                    e.preventDefault();
                     if (!search_params.origin) {
                         alert("Please select an origin.")
                     } else {
