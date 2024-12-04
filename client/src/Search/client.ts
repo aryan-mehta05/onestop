@@ -29,7 +29,7 @@ export const get_flight_inspo_data = async (origin: string, one_way: boolean, no
 
 export const get_airport_city_details = async (airport_code: string) => {
     const token = await get_token();
-    const API_url = `${BASE_API}/reference-data/locations?subType=CITY&keyword=${airport_code}&sort=analytics.travelers.score&view=LIGHT}`
+    const API_url = `${BASE_API}/reference-data/locations?subType=CITY&keyword=${airport_code}&sort=analytics.travelers.score&view=LIGHT`
     const { data } = await axios.get(API_url, { headers: { 'Authorization': `Bearer ${token}` } });
     return data;
 }
