@@ -10,6 +10,20 @@ export default function Search() {
             const response = await client.get_flight_inspo_data(origin, one_way, nonstop, max_price);
             setData_loaded(true);
             setData(response.data);
+            for (const key in response.data) {
+                let origin = response.data[key].origin;
+                let destination = response.data[key].destination;
+                let departureDate = response.data[key].departureDate;
+                let returnDate = response.data[key].returnDate;
+                let price = response.data[key].price.total;
+                client.createFlightInspiration({
+                    origin: origin,
+                    destination: destination,
+                    departureDate: departureDate,
+                    returnDate: returnDate,
+                    price: price
+                })
+            }
         } catch (error) {
             alert("Something went wrong.  Please ensure your origin is a valid Airport code.")
         }
@@ -53,7 +67,7 @@ export default function Search() {
                             <div>Return Date: {object.returnDate}</div>
                             {object && object.price && <div>Price: {JSON.stringify(object.price.total, null, 2)}</div>}
                             <a href={`/details/${object.destination}`}>
-                            <button>Get More Inspiration!</button>
+                                <button>Get More Inspiration!</button>
                             </a>
                             <br />
                         </li>

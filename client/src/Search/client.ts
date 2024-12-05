@@ -10,6 +10,8 @@ const BASE_API = "https://test.api.amadeus.com/v1";
 // const test_parameters = `${FLIGHT_OFFERS_API}/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2024-12-01&adults=1&max=2`;
 // const test_parameters2 = `${FLIGHT_INSPO_API}/shopping/flight-destinations?origin=MAD&oneWay=false&nonStop=false&maxPrice=500`;
 
+export const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER || "http://localhost:4000";
+
 const get_token = async () => {
     const data = { 'grant_type': "client_credentials", 'client_id': API_KEY, 'client_secret': API_SECRET };
     const resp = await axios.post(AUTH_API, qs.stringify(data));
@@ -35,6 +37,11 @@ export const get_airport_city_details = async (airport_code: string) => {
         return data.data
     } else {
         return -1
-    }
-    ;
+    };
+}
+
+export const createFlightInspiration = async (flightInspiration: any) => {
+    console.log(flightInspiration);
+    const response = await axios.post(`${REMOTE_SERVER}/api/flightInspiration/`, flightInspiration);
+    return response.data;
 }
