@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import * as searchClient from "../client"
 
-export default function SearchResults() {
+export default function SearchDetails() {
     const { airportCode } = useParams();
     const [data, setData] = useState<any>();
     const getCityFromAirportCode = async () => {

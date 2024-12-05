@@ -7,7 +7,7 @@ import SignUp from "./Auth/SignUp";
 import { AuthProvider } from "./Auth/AuthContext";
 import { ProtectedRoute } from "./Auth/ProtectedRoute";
 import Search from "./Search";
-import SearchResults from "./Search/Results"
+import SearchDetails from "./Search/Details"
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/search/:airportCode" element={<SearchResults />} />
+          <Route path="/details/:airportCode" element={<SearchDetails />} />
           <Route
             path="/feed"
             element={

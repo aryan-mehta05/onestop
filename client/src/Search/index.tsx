@@ -52,10 +52,9 @@ export default function Search() {
                             <div>Departure Date: {object.departureDate}</div>
                             <div>Return Date: {object.returnDate}</div>
                             {object && object.price && <div>Price: {JSON.stringify(object.price.total, null, 2)}</div>}
-                            <a href={`/search/${object.destination}`}>
+                            <a href={`/details/${object.destination}`}>
                             <button>Get More Inspiration!</button>
                             </a>
-                            
                             <br />
                         </li>
                     </div>
