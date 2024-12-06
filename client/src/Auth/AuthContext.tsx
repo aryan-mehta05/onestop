@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 
 import * as db from '../Database';
+import * as client from './client'
 
 interface User {
   _id: string;
@@ -27,7 +28,7 @@ const AuthContext = createContext<AuthContextType>({
   user: null,
   signIn: async () => false,
   signUp: async () => false,
-  signOut: () => {},
+  signOut: () => { },
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -39,24 +40,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const users: User[] = db.users;
 
   const signIn = async (username: string, password: string): Promise<boolean> => {
-    const foundUser = users.find(
-      (u) => u.username === username && u.password === password
-    );
-    if (foundUser) {
-      setUser(foundUser);
-      return true;
-    } else {
+    const user = await client.signin({ username: username, password: password });
+
+    if (!user) {
       return false;
     }
-  };
 
-  const signUp = async (userData: User): Promise<boolean> => {
-    users.push(userData);
-    setUser(userData);
+    setUser(user);
     return true;
   };
 
-  const signOut = () => {
+  const signUp = async (userData: User): Promise<boolean> => {
+    const user = await client.signup(userData);
+
+    if (!user) {
+      return false;
+    }
+
+    users.push(user);
+    setUser(user);
+
+    return true;
+  };
+
+  const signOut = async () => {
+    await client.signout();
+
     setUser(null);
   };
 
