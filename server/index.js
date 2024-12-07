@@ -9,8 +9,7 @@ import PostsRoutes from "./onestop/posts/routes.js";
 import UserRoutes from "./onestop/users/routes.js";
 import FlightInspirationRoutes from "./onestop/flightInspiration/routes.js";
 
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb+srv://giuseppi:supersecretpassword@kanbas.fnscj.mongodb.net/onestop?retryWrites=true&w=majority&appName=Kanbas" || "mongodb://127.0.0.1:27017/kanbas"
-// const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas"
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas"
 const app = express();
 
 dotenv.config();
