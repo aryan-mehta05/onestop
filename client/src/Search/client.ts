@@ -55,3 +55,9 @@ export const findPostsByCity = async (city:String) => {
     const response = await axios .get(`${REMOTE_SERVER}/api/posts/getPostsByLocation/${city}`);
     return response.data;
 }
+
+export const findPostsByCityAndCountry = async (city:String, country:String) => {
+    const response = await axios .get(`${REMOTE_SERVER}/api/posts/getPostsByLocation?city=${city}&country=${country}`);
+    console.log(response.data);
+    return response.data;
+}

@@ -28,4 +28,11 @@ export default function PostsRoutes(app) {
         return response.send(posts);
     };
     app.get("/api/posts/getPostsByLocation/:city", getPostsByCity);
+
+    const getPostsByCityAndCountry = async (request, response) => {
+        const {city, country} = request.query;
+        const posts = await dao.findPostsByCityAndCountry(city, country);
+        return response.send(posts);
+    };
+    app.get("/api/posts/getPostsByLocation", getPostsByCityAndCountry);
 }

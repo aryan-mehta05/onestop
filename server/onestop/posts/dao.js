@@ -9,5 +9,11 @@ export function findPostsByUsername(username) {
 }
 
 export function findPostsByCity(city) {
-    return model.find({ destinationCity: city });
+    return model.find({ destinationCity: new RegExp(city, "i") });
+}
+
+export function findPostsByCityAndCountry(city, country) {
+    const cityRegExp = new RegExp(city, "i")
+    const countryRegExp = new RegExp(country, "i")
+    return model.find({ destinationCity:  cityRegExp, destinationCountry: countryRegExp});
 }

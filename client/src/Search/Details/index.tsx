@@ -8,7 +8,8 @@ export default function SearchDetails() {
     const [posts, setPosts] = useState<any>();
     const getLocationAndRelatedPosts = async () => {
         const cityData = await getCityFromAirportCode();
-        await findRelatedPostsByCity(cityData.name);
+        // await findRelatedPostsByCity(cityData.name);
+        await findRelatedPostsByCityAndCountry(cityData.name, cityData.address.countryName)
     }
     const getCityFromAirportCode = async () => {
         if (airportCode) {
@@ -23,6 +24,10 @@ export default function SearchDetails() {
         const response = await searchClient.findPostsByCity(city);
         setPosts(response);
     }
+    const findRelatedPostsByCityAndCountry = async (city:String, country:String) => {
+        const response = await searchClient.findPostsByCityAndCountry(city, country);
+        setPosts(response);
+    }
     useEffect(() => {
         if (!locationData) {
             getLocationAndRelatedPosts();
@@ -33,8 +38,20 @@ export default function SearchDetails() {
             <h1>Search Results</h1>
             <h2>{locationData && locationData != -1 && JSON.stringify(locationData.name)}</h2>
             <h2>{locationData && locationData != -1 && JSON.stringify(locationData.address.countryName)}</h2>
-            <br /><br />
-            <h3>{posts && JSON.stringify(posts)}</h3>
+            <br />
+            <ul>
+                {posts && posts.map((object: any) => (
+                    <div>
+                        <li>
+                            <div>{object.photo}</div>
+                            <div>{object.destinationCity}, {object.destinationCountry}</div>
+                            <div>{object.caption}</div>
+                            <div>{object.poster}</div>
+                            <br />
+                        </li>
+                    </div>
+                ))}
+            </ul>
         </div>
     )
 }
