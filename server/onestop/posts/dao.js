@@ -8,6 +8,6 @@ export function findPostsByUsername(username) {
     return model.find({ poster: username });
 }
 
-export function findPostsByLocation(location) {
-    return model.find({ location: location });
+export function findPostsByCity(city) {
+    return model.find({ destinationCity: city });
 }

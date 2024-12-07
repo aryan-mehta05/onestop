@@ -21,11 +21,11 @@ export default function PostsRoutes(app) {
     };
     app.get("/api/posts/getPostsByUsername/:username", getPostsByUsername);
 
-    const getPostsByLocation = async (request, response) => {
-        const { location } = request.params;
-        const posts = await dao.findPostsByLocation(location);
+    const getPostsByCity = async (request, response) => {
+        const { city } = request.params;
+        const posts = await dao.findPostsByCity(city);
 
         return response.send(posts);
     };
-    app.get("/api/posts/getPostsByLocation/:location", getPostsByLocation);
+    app.get("/api/posts/getPostsByLocation/:city", getPostsByCity);
 }

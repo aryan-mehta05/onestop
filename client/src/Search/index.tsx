@@ -28,9 +28,6 @@ export default function Search() {
             alert("Something went wrong.  Please ensure your origin is a valid Airport code.")
         }
     };
-    // useEffect(() => {
-    //     testAPI();
-    // }, []);
     return (
         <div>
             <h1>Search</h1>
@@ -46,7 +43,7 @@ export default function Search() {
                 <br />
                 <label htmlFor="max-price-input">Max Price (optional): </label>
                 <input id="max-price-input" type="number" onChange={(e) => setSearch_params({ ...search_params, max_price: parseInt(e.target.value) })} />
-                <br />
+                <br /><br />
                 <button onClick={(e) => {
                     e.preventDefault();
                     if (!search_params.origin) {
@@ -69,7 +66,7 @@ export default function Search() {
                             <a href={`/details/${object.destination}`}>
                                 <button>Get More Inspiration!</button>
                             </a>
-                            <br />
+                            <br /><br />
                         </li>
                     </div>
                 ))}
