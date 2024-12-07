@@ -41,7 +41,17 @@ export const get_airport_city_details = async (airport_code: string) => {
 }
 
 export const createFlightInspiration = async (flightInspiration: any) => {
-    console.log(flightInspiration);
+    // console.log(flightInspiration);
     const response = await axios.post(`${REMOTE_SERVER}/api/flightInspiration/`, flightInspiration);
+    return response.data;
+}
+
+export const findAllSearchHistory = async () => {
+    const response = await axios.get(`${REMOTE_SERVER}/api/flightInspiration/`);
+    return response.data;
+}
+
+export const findPostsByCity = async (city:String) => {
+    const response = await axios .get(`${REMOTE_SERVER}/api/posts/getPostsByLocation/${city}`);
     return response.data;
 }

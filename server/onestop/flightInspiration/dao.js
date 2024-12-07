@@ -7,3 +7,7 @@ export function findAllHistory(userId) {
 export function createFlightInspiration(flightInspiration) {
     return model.create(flightInspiration);
 }
+
+export function getAllFlightInspiration() {
+    return model.find();
+}
