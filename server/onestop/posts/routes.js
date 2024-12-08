@@ -42,4 +42,11 @@ export default function PostsRoutes(app) {
         return response.send(posts);
     };
     app.get("/api/posts/getPostsByQuery", getPostsByQuery);
+
+    const getPostsByUser = async (req, res) => {
+        const {username} = req.params;
+        const posts = await dao.findPostsByUsername(username);
+        return res.send(posts);
+    };
+    app.get("/api/posts/getPostsByUser/:username", getPostsByUser);    
 }

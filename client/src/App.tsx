@@ -9,6 +9,7 @@ import { ProtectedRoute } from "./Auth/ProtectedRoute";
 import Search from "./Search";
 import SearchDetails from "./Search/Details"
 import SearchBarResults from "./Search/SearchBarResults";
+import Profile from "./Profile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/search/:query" element={<SearchBarResults />} />
           <Route path="/search" element={<Search />} />
           <Route path="/details/:airportCode" element={<SearchDetails />} />
+          <Route path="/profile" element={<Profile />} />
           <Route
             path="/feed"
             element={

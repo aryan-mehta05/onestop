@@ -20,7 +20,7 @@ export default function SearchBarResults() {
             <ul>
                 {posts && posts.map((object: any) => (
                     <div>
-                        <li>
+                        <li className="border">
                             <div>{object.photo}</div>
                             <div>{object.destinationCity}, {object.destinationCountry}</div>
                             <div>{object.caption}</div>

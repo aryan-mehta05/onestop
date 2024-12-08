@@ -12,7 +12,7 @@ const BASE_API = "https://test.api.amadeus.com/v1";
 
 export const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER || "http://localhost:4000";
 
-const get_token = async () => {
+export const get_token = async () => {
     const data = { 'grant_type': "client_credentials", 'client_id': API_KEY, 'client_secret': API_SECRET };
     const resp = await axios.post(AUTH_API, qs.stringify(data));
     const token = resp.data.access_token;

@@ -67,7 +67,7 @@ export default function Search() {
             <ul>
                 {data_loaded && data.map((object: any) => (
                     <div>
-                        <li>
+                        <li className="border">
                             <div>Origin: {object.origin}</div>
                             <div>Destination: {object.destination}</div>
                             <div>Departure Date: {object.departureDate}</div>
@@ -92,7 +92,7 @@ export default function Search() {
             <ul>
                 {history.length != 0 && history.map((object: any) => (
                     <div>
-                        <li>
+                        <li className="border">
                             <div>Origin: {object.origin}</div>
                             <div>Destination: {object.destination}</div>
                             <div>Departure Date: {object.departureDate}</div>
