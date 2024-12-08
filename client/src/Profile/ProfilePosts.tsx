@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import * as client from "./client";
 
 export default function ProfilePosts() {
-    const currentUser = "mike_lappas"
+    const currentUser = "mike_lappas1"
     // const currentUser = "test";
     const [posts, setPosts] = useState<any>();
     const getPostsForUser = async (user:String) => {

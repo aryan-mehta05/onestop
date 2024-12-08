@@ -6,7 +6,9 @@ export const findPostsByUser = async (user:String) => {
     return response.data;
 }
 
-// export const findFriendsByUsername = async (username:String) => {
-//     const response = await axios.get(`${REMOTE_SERVER}/api/friends/${username}`);
-//     return response.data;
-// } 
+export const findFriendsByUsername = async (username:String) => {
+    const userResponse = await axios.get(`${REMOTE_SERVER}/api/user/${username}`)
+    const user_id = userResponse.data._id
+    const response = await axios.get(`${REMOTE_SERVER}/api/friends/${user_id}`);
+    return response.data;
+} 
