@@ -8,6 +8,7 @@ import { AuthProvider } from "./Auth/AuthContext";
 import { ProtectedRoute } from "./Auth/ProtectedRoute";
 import Search from "./Search";
 import SearchDetails from "./Search/Details"
+import SearchBarResults from "./Search/SearchBarResults";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/search/:query" element={<SearchBarResults />} />
           <Route path="/search" element={<Search />} />
           <Route path="/details/:airportCode" element={<SearchDetails />} />
           <Route

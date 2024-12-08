@@ -52,12 +52,16 @@ export const findAllSearchHistory = async () => {
 }
 
 export const findPostsByCity = async (city:String) => {
-    const response = await axios .get(`${REMOTE_SERVER}/api/posts/getPostsByLocation/${city}`);
+    const response = await axios.get(`${REMOTE_SERVER}/api/posts/getPostsByLocation/${city}`);
     return response.data;
 }
 
 export const findPostsByCityAndCountry = async (city:String, country:String) => {
-    const response = await axios .get(`${REMOTE_SERVER}/api/posts/getPostsByLocation?city=${city}&country=${country}`);
-    console.log(response.data);
+    const response = await axios.get(`${REMOTE_SERVER}/api/posts/getPostsByLocation?city=${city}&country=${country}`);
+    return response.data;
+}
+
+export const findPostsByQuery = async (query:String) => {
+    const response = await axios.get(`${REMOTE_SERVER}/api/posts/getPostsByQuery?query=${query}`);
     return response.data;
 }

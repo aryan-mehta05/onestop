@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { RxCross2 } from "react-icons/rx";
+import { useNavigate } from 'react-router-dom';
+
 
 const SearchBar = () => {
+  const navigate = useNavigate();
   const [searchText, setSearchText] = useState<string>("");
-
   const [filterButtons, setFilterButtons] = useState([
     {
       id: 1,
@@ -33,6 +35,11 @@ const SearchBar = () => {
         className="flex-1 focus:outline-none text-gray-700 text-xl font-playfair italic focus:not-italic"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
+        onKeyUp={(e) => {
+          if (e.key === "Enter") {
+            navigate(`/search/${searchText}`)
+          }
+        }}
       />
 
       {/* Buttons */}

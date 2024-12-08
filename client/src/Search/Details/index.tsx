@@ -20,10 +20,10 @@ export default function SearchDetails() {
             throw ("Missing airportCode");
         }
     };
-    const findRelatedPostsByCity = async (city:String) => {
-        const response = await searchClient.findPostsByCity(city);
-        setPosts(response);
-    }
+    // const findRelatedPostsByCity = async (city:String) => {
+    //     const response = await searchClient.findPostsByCity(city);
+    //     setPosts(response);
+    // }
     const findRelatedPostsByCityAndCountry = async (city:String, country:String) => {
         const response = await searchClient.findPostsByCityAndCountry(city, country);
         setPosts(response);

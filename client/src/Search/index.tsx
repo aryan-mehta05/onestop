@@ -53,7 +53,7 @@ export default function Search() {
                 <label htmlFor="max-price-input">Max Price (optional): </label>
                 <input id="max-price-input" type="number" onChange={(e) => setSearch_params({ ...search_params, max_price: parseInt(e.target.value) })} />
                 <br /><br />
-                <button onClick={(e) => {
+                <button className="bg-os-red border border-os-red text-white px-3 py-2 rounded-md hover:scale-110 transition-transform" onClick={(e) => {
                     e.preventDefault();
                     if (!search_params.origin) {
                         alert("Please select an origin.")
@@ -61,7 +61,7 @@ export default function Search() {
                         getFlightData(search_params.origin, search_params.one_way, search_params.nonstop, search_params.max_price)
                     }
                 }
-                }>Get Flight Insperation</button>
+                }>Get Flight Inspiration</button>
                 <br /><br />
             </form>
             <ul>
@@ -81,7 +81,7 @@ export default function Search() {
                     </div>
                 ))}
             </ul>
-            <button onClick={(e) => {
+            <button className="bg-white border border-os-red text-os-red px-3 py-2 rounded-md hover:scale-110 transition-transform" onClick={(e) => {
                 e.preventDefault();
                 getAllSearchHistory();
             }}>
@@ -99,7 +99,7 @@ export default function Search() {
                             <div>Return Date: {object.returnDate}</div>
                             {object && object.price && <div>Price: {JSON.stringify(object.price, null, 2)}</div>}
                             <a href={`/details/${object.destination}`}>
-                                <button>Get More Inspiration!</button>
+                                <button >Get More Inspiration!</button>
                             </a>
                             <br /><br />
                         </li>
