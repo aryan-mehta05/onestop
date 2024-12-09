@@ -1,5 +1,9 @@
 import model from "./model.js";
 
+export function createPost(post) {
+    return model.create(post);
+}
+
 export function findAllPosts() {
     return model.find();
 }
@@ -13,13 +17,15 @@ export function findPostsByCity(city) {
 }
 
 export function findPostsByCityAndCountry(city, country) {
-    const cityRegExp = new RegExp(city, "i")
-    const countryRegExp = new RegExp(country, "i")
+    const cityRegExp = new RegExp(city, "i");
+    const countryRegExp = new RegExp(country, "i");
+
     return model.find({ destinationCity: cityRegExp, destinationCountry: countryRegExp });
 }
 
 export function findPostsByQuery(query) {
-    const queryRegExp = new RegExp(query, "i")
+    const queryRegExp = new RegExp(query, "i");
+
     return model.find({
         $or: [
             { destinationCity: queryRegExp },

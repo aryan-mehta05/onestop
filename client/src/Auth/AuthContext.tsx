@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from 'react';
 
-import * as db from '../Database';
 import * as client from './client'
 
 interface User {
@@ -36,9 +35,6 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  // Users data from users.json
-  const users: User[] = db.users;
-
   const signIn = async (username: string, password: string): Promise<boolean> => {
     const user = await client.signin({ username: username, password: password });
 
@@ -57,7 +53,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return false;
     }
 
-    users.push(user);
     setUser(user);
 
     return true;

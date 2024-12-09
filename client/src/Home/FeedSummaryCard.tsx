@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 // import { FiSend } from "react-icons/fi";
 // import { FaHeart } from "react-icons/fa6";
 import { IoIosEye } from "react-icons/io";
@@ -10,10 +9,8 @@ import { IoIosEye } from "react-icons/io";
 
 interface FeedSummaryCardProps {
   id: number;
-  image: string;
+  image: Buffer | any;
   postedByUser: string;
-  postedByUserImage: string;
-  type: string;
   description: string;
   views: number;
 };
@@ -22,14 +19,13 @@ const FeedSummaryCard = ({
   id,
   image,
   postedByUser,
-  postedByUserImage,
-  type,
-  // description,
+  description,
   views,
 }: FeedSummaryCardProps) => {
   // const [isLiked, setIsLiked] = useState<boolean>(false);
   const isSignedIn = false;
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
+  const imageData = "data:image/png;base64," + String.fromCharCode(...image.data);
   const navigate = useNavigate();
 
   function formatViews(views: number): string {
@@ -42,8 +38,8 @@ const FeedSummaryCard = ({
     } else {
       return views.toString();
     }
-  };  
-  
+  };
+
   return (
     <div
       className="relative flex-shrink-0 w-[300px] h-[400px] border border-gray-200 rounded-lg shadow-md overflow-hidden"
@@ -51,8 +47,7 @@ const FeedSummaryCard = ({
     >
       {/* Image */}
       <img
-        src={image}
-        alt={type + id}
+        src={imageData}
         className="absolute top-0 left-0 w-full h-full object-cover"
       />
 
@@ -61,16 +56,8 @@ const FeedSummaryCard = ({
         <div className="flex flex-col h-full justify-between">
           <div className="m-2 flex items-center justify-between">
             {/* Top card content */}
-            <p className="rounded-full flex items-center justify-between border border-os-darkblue bg-os-darkblue text-os-sky px-2 py-0.5 hover:cursor-pointer hover:border-white hover:scale-105 transition-transform">
-              {type}
-            </p>
             <button className="flex items-center">
               <p className="text-xs bg-white pl-2 pr-5 rounded-full">{postedByUser}</p>
-              <img
-                src={postedByUserImage}
-                alt={postedByUser}
-                className="w-8 h-8 rounded-full border border-1 border-white hover:border-2 hover:scale-105 transition-transform -ml-4"
-              />
             </button>
           </div>
           <div className="backdrop-blur-[2px]">
@@ -102,7 +89,7 @@ const FeedSummaryCard = ({
               </div>
               <div>
                 <button
-                  className={`px-3 font-semibold rounded-md text-black ${isFollowing ? "bg-os-yellow hover:bg-os-orange": "bg-os-sky hover:bg-os-lightblue"}`}
+                  className={`px-3 font-semibold rounded-md text-black ${isFollowing ? "bg-os-yellow hover:bg-os-orange" : "bg-os-sky hover:bg-os-lightblue"}`}
                   onClick={() => {
                     if (isSignedIn) {
                       setIsFollowing(!isFollowing)

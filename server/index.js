@@ -1,7 +1,9 @@
 import "dotenv/config";
+
+import bodyParser from "body-parser";
 import cors from "cors";
-import dotenv from 'dotenv';
-import express from 'express';
+import dotenv from "dotenv";
+import express from "express";
 import mongoose from "mongoose";
 import session from "express-session";
 
@@ -16,7 +18,9 @@ const app = express();
 dotenv.config();
 
 mongoose.connect(CONNECTION_STRING);
-app.use(express.json());
+
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(
     cors({
         credentials: true,
