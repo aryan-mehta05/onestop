@@ -10,3 +10,15 @@ export const getAllPosts = async () => {
 
     return response.data;
 }
+
+export const likePost = async (postId: String) => {
+    const response = await axiosWithCredentials.post(`${POSTS_API}/likePost`, { postId: postId });
+
+    return response.data;
+}
+
+export const viewPost = async (postId: String) => {
+    const response = await axiosWithCredentials.post(`${POSTS_API}/viewPost`, { postId: postId });
+
+    return response.data;
+}

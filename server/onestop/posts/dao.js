@@ -4,6 +4,10 @@ export function createPost(post) {
     return model.create(post);
 }
 
+export function findPostById(postId) {
+    return model.find({ _id: postId });
+}
+
 export function findAllPosts() {
     return model.find();
 }
@@ -34,4 +38,8 @@ export function findPostsByQuery(query) {
             { caption: queryRegExp }
         ]
     });
+}
+
+export function updatePost(postId, postUpdates) {
+    return model.findOneAndUpdate({ _id: postId }, { $set: postUpdates });
 }

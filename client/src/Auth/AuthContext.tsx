@@ -43,6 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     setUser(user);
+
     return true;
   };
 

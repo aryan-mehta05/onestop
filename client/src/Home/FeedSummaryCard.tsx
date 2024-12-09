@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { IoIosEye } from "react-icons/io";
+import { TbThumbUp } from "react-icons/tb";
+import { likePost, viewPost } from "./client";
 // import { FiSend } from "react-icons/fi";
 // import { FaHeart } from "react-icons/fa6";
-import { IoIosEye } from "react-icons/io";
 // import { FaRegHeart } from "react-icons/fa";
 // import { FaRegComment } from "react-icons/fa";
 // import { HiDotsVertical } from "react-icons/hi";
 
 interface FeedSummaryCardProps {
-  id: number;
+  id: string;
   image: Buffer | any;
   postedByUser: string;
   description: string;
   views: number;
+  likes: number;
 };
 
 const FeedSummaryCard = ({
@@ -21,6 +24,7 @@ const FeedSummaryCard = ({
   postedByUser,
   description,
   views,
+  likes,
 }: FeedSummaryCardProps) => {
   // const [isLiked, setIsLiked] = useState<boolean>(false);
   const isSignedIn = false;
@@ -28,7 +32,7 @@ const FeedSummaryCard = ({
   const imageData = "data:image/png;base64," + String.fromCharCode(...image.data);
   const navigate = useNavigate();
 
-  function formatViews(views: number): string {
+  function format(views: number): string {
     if (views >= 1_000_000_000) {
       return (views / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
     } else if (views >= 1_000_000) {
@@ -84,19 +88,38 @@ const FeedSummaryCard = ({
             <div className="bg-os-darkblue px-2 py-1 flex items-center justify-between">
               <div className="text-white flex items-center">
                 <IoIosEye className="w-4 h-4 mr-1" />
-                <p className="text-xs">{formatViews(views)} views</p>
+                <p className="text-xs">{format(views)} views</p>
+                <span className="text-md text-gray-300 ml-2">|</span>
+                <TbThumbUp className="w-4 h-4 mr-1" />
+                <p className="text-xs">{format(likes)} likes</p>
                 <span className="text-md text-gray-300 ml-2">|</span>
               </div>
               <div>
                 <button
+                  className={`px-3 font-semibold rounded-md text-black bg-os-sky hover:bg-os-lightblue}`}
+                  onClick={() => {
+                    if (!isSignedIn) {
+                      navigate('/signin');
+                      return;
+                    }
+
+                    likePost(id);
+
+                    likes += 1;
+                  }}
+                >
+                  {"Like"}
+                </button>
+                {" "}
+                <button
                   className={`px-3 font-semibold rounded-md text-black ${isFollowing ? "bg-os-yellow hover:bg-os-orange" : "bg-os-sky hover:bg-os-lightblue"}`}
                   onClick={() => {
-                    if (isSignedIn) {
-                      setIsFollowing(!isFollowing)
-                    } else {
-                      alert("You need to sign in for that!");
+                    if (!isSignedIn) {
                       navigate('/signin');
+                      return;
                     }
+
+                    setIsFollowing(!isFollowing)
                   }}
                 >
                   {isFollowing ? "Unfollow" : "Follow"}

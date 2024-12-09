@@ -58,6 +58,7 @@ const Feed = () => {
     }
 
     const newPost = {
+      user: auth.user?._id,
       poster: auth.user?.username,
       photo: btoa(binary),
       caption: caption,

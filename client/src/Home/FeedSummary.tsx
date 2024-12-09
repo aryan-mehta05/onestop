@@ -55,12 +55,13 @@ const FeedSummary = () => {
         >
           {posts.map((post) => (
             <FeedSummaryCard
-              key={post.id}
-              id={post.id}
+              key={post._id}
+              id={post._id}
               image={post.photo}
               postedByUser={post.poster}
               description={post.caption}
               views={post.views}
+              likes={post.likes}
             />
           ))}
         </div>

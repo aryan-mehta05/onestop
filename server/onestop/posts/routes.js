@@ -9,7 +9,26 @@ export default function PostsRoutes(app) {
     };
     app.post("/api/posts/createPost", createPost);
 
-    const likePost = async (request, response) => { };
+    const likePost = async (request, response) => {
+        const { postId } = request.body;
+
+        const post = await dao.findPostById(postId);
+        await dao.updatePost(postId, { likes: post[0].likes + 1 });
+
+        return response.sendStatus(200);
+    };
+    app.post("/api/posts/likePost", likePost);
+
+    const viewPost = async (request, response) => {
+        const { postId } = request.body;
+
+        const post = await dao.findPostById(postId);
+        await dao.updatePost(postId, { views: post[0].views + 1 });
+
+        return response.sendStatus(200);
+    }
+    app.post("/api/posts/viewPost", viewPost);
+
     const updatePost = async (request, response) => { };
     const deletePost = async (request, response) => { };
 
