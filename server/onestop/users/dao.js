@@ -8,3 +8,5 @@ export const createUser = (user) => {
 
 export const findUserByCredentials = (username, password) => model.findOne({ username, password });
 export const findUserByUsername = (username) => model.findOne({ username: username });
+
+export const updateUser = (uid, user) => model.updateOne({ _id: uid }, { $set: user });

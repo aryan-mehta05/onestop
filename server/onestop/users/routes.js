@@ -54,4 +54,12 @@ export default function UserRoutes(app) {
         return res.send(user);
     };
     app.get("/api/user/:username", findUsersByUsername);
+
+    const updateUser = async (req, res) => {
+        const user = req.body;
+        const {uid} = req.params;
+        const updatedUser = await dao.updateUser(uid, user)
+        res.send(updatedUser);
+    };
+    app.put("/api/user/update/:uid", updateUser);
 }
