@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
-import * as client from "./client";
-import * as homeClient from "../Home/client";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUserLikes } from "../SignIn/reducer";
+import * as client from "./client";
+import * as homeClient from "../Home/client";
 
 export default function ProfilePosts(profileUsername?: { profileUsername: any; }) {
     const dispatch = useDispatch();
     const { currentUser } = useSelector((state: any) => state.userReducer);
     const [posts, setPosts] = useState<any>();
+    const [postLikes, setPostLikes] = useState<any>([]);
     const [userLikesObjects, setUserLikesObjects] = useState(currentUser.likes);
     let userLikes: any;
     if (userLikesObjects) {
@@ -33,6 +34,19 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
     useEffect(() => {
         getPostsForUser(currentUser);
     }, []);
+    useEffect(() => {
+        const fetchLikes = async () => {
+            let likes = [];
+            for (const p of posts) {
+                likes[p._id] = await homeClient.likes(p._id);
+            }
+            setPostLikes(likes);
+        };
+
+        if (posts && posts.length > 0) {
+            fetchLikes();
+        }
+    }, [posts]);
     return (
         <div className="w-6">
             <div className="justify-center">Posts</div>
@@ -40,6 +54,7 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
             <ul>
                 {posts && posts.length > 0 && posts.map((post: any) => {
                     const imageData = "data:image/png;base64," + String.fromCharCode(...post.photo.data);
+                    const likeCount = postLikes[post._id];
 
                     return (
                         <li className="list-group-item border m-2">
@@ -49,6 +64,7 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
                             <div>{post.destinationCity}, {post.destinationCountry}</div>
                             {!userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
                             {userLikes.includes(post._id) && <div>Liked!</div>}
+                            {<div>{likeCount === undefined ? "Loading..." : `Likes: ${likeCount.length}`}</div>}
                         </li>
                     )
                 })}

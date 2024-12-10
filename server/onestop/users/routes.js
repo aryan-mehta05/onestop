@@ -9,7 +9,7 @@ export default function UserRoutes(app) {
             return;
         }
 
-        const currentUser = dao.createUser(request.body);
+        const currentUser = await dao.createUser(request.body);
 
         request.session["currentUser"] = currentUser;
         response.json(currentUser);
@@ -49,7 +49,7 @@ export default function UserRoutes(app) {
     app.post("/api/users/profile", profile);
 
     const findUsersByUsername = async (req, res) => {
-        const {username} = req.params;
+        const { username } = req.params;
         const user = await dao.findUserByUsername(username);
         return res.send(user);
     };
@@ -57,7 +57,7 @@ export default function UserRoutes(app) {
 
     const updateUser = async (req, res) => {
         const user = req.body;
-        const {uid} = req.params;
+        const { uid } = req.params;
         const updatedUser = await dao.updateUser(uid, user)
         res.send(updatedUser);
     };

@@ -9,7 +9,6 @@ export default function PostsRoutes(app) {
     };
     app.post("/api/posts/createPost", createPost);
 
-    const likePost = async (request, response) => { };
     const updatePost = async (request, response) => { };
     const deletePost = async (request, response) => { };
 

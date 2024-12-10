@@ -1,4 +1,3 @@
-import { model } from "mongoose";
 import * as dao from "./dao.js";
 
 export default function LikesRoutes(app) {
@@ -11,7 +10,7 @@ export default function LikesRoutes(app) {
 
     const getLikesByPostId = async (req, res) => {
         const {pid} = req.params;
-        const likes = await dao.getLikesByPostId({pid});
+        const likes = await dao.getLikesByPostId(pid);
         return res.send(likes);
     };
     app.get("/api/likes/:pid", getLikesByPostId);

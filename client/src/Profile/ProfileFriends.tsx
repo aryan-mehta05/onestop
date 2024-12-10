@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import * as client from "./client";
-import React from "react";
 import { useSelector } from "react-redux";
+import * as client from "./client";
 
 export default function ProfileFriends(profileUsername?: { profileUsername: any }) {
     const { currentUser } = useSelector((state: any) => state.userReducer);
@@ -36,7 +35,5 @@ export default function ProfileFriends(profileUsername?: { profileUsername: any 
                 ))}
             </ul>
         </div>
-
-
     )
 }

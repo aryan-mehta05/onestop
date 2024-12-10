@@ -57,7 +57,6 @@ export default function CreatePost() {
             destinationCity: destinationCity,
             destinationCountry: destinationCountry,
             caption: caption,
-            likes: 0
         }
         await client.createNewPost(newPost);
         navigate("/profile");
