@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as client from "./client";
-import React from "react";
 import { useSelector } from "react-redux";
 import Nav from "../Nav/index";
 
@@ -30,7 +29,7 @@ export default function Search() {
                 })
             }
         } catch (error) {
-            alert("Something went wrong.  Please ensure your origin is a valid Airport code.")
+            alert("Something went wrong. Please ensure your origin is a valid Airport code.")
         }
     };
     const getAllSearchHistory = async () => {
@@ -41,7 +40,7 @@ export default function Search() {
     return (
         <div>
             {/* <h1>{auth.user ? auth.user.loginId : 'No User!'}</h1> */}
-            <Nav/>
+            <Nav />
             <h1>Search</h1>
             <h2>hello {currentUser.username}</h2>
             <form action="">

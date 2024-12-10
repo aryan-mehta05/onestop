@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Nav from "../Nav/index";
 import { Link, useParams } from "react-router-dom";
 import * as client from "./client";
-import { setCurrentUser, setCurrentUserFriends } from "../SignIn/reducer";
+import { setCurrentUserFriends } from "../SignIn/reducer";
 
 export default function Profile() {
     const dispatch = useDispatch();
@@ -17,14 +17,13 @@ export default function Profile() {
         userFriends = userFriendsObjects.map((friendItem: any) => (
             friendItem.user2
         ))
-    } else {userFriends = []}
+    } else { userFriends = [] }
     const profileUsername = useParams().username;
     const [profileUser, setProfileUser] = useState<any>();
     const followFriend = async () => {
         const response = await client.followFriend(currentUser._id, profileUser._id);
         setUserFriendsObjects([...userFriendsObjects, response]);
         dispatch(setCurrentUserFriends([...currentUser.friends, response]));
-        
     }
     const findUserByUsername = async (username: string) => {
         let response = {}
@@ -45,7 +44,7 @@ export default function Profile() {
             {!profileUsername && <Link to="/createPost">
                 {currentUser.role !== "BASIC" && <button>Create New Post</button>}
             </Link>}
-            {profileUsername && profileUser &&!userFriends.includes(profileUser._id) && <button onClick={(() => { followFriend() })}>Follow</button>}
+            {profileUsername && profileUser && !userFriends.includes(profileUser._id) && <button onClick={(() => { followFriend() })}>Follow</button>}
             {profileUsername && profileUser && userFriends.includes(profileUser._id) && <div>Followed!</div>}
 
             <div className="flex w-full h-screen">

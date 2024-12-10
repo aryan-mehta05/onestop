@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import * as searchClient from "../client"
-import React from "react";
 import Nav from "../../Nav/index";
 import { useSelector } from "react-redux";
 

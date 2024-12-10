@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as client from "./client";
 import * as profileClient from "../Profile/client";

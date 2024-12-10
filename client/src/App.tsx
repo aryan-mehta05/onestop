@@ -1,9 +1,9 @@
-import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Home/index";
 import SignIn from './SignIn/index';
 import SignUp from './SignUp/index';
+import SignOut from './SignOut';
 import Search from './Search/index';
 import Profile from './Profile/index';
 import SearchDetails from './Search/Details/index';
@@ -21,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signin/" element={<SignIn />} />
           <Route path="/signup/" element={<SignUp />} />
+          <Route path="/signout/" element={<SignOut />} />
           <Route path="/search/:query" element={<ProtectedRoute><SearchBarResults /></ProtectedRoute>} />
           <Route path="/search/" element={<ProtectedRoute><Search /></ProtectedRoute>} />
           <Route path="/details/:airportCode" element={<SearchDetails />} />
