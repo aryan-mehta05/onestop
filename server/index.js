@@ -11,6 +11,7 @@ import PostsRoutes from "./onestop/posts/routes.js";
 import UserRoutes from "./onestop/users/routes.js";
 import FlightInspirationRoutes from "./onestop/flightInspiration/routes.js";
 import FriendsRoutes from "./onestop/friends/routes.js"
+import LikesRoutes from "./onestop/likes/routes.js";
 
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas"
 const app = express();
@@ -49,5 +50,6 @@ PostsRoutes(app);
 UserRoutes(app);
 FlightInspirationRoutes(app);
 FriendsRoutes(app);
+LikesRoutes(app);
 
 app.listen(process.env.PORT || 4000);
