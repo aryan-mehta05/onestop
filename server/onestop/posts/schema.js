@@ -7,7 +7,6 @@ const postSchema = new mongoose.Schema({
     destinationCity: { type: String, required: true },
     destinationCountry: { type: String, required: true },
     caption: { type: String, required: true },
-    views: { type: Number },
     likes: { type: Number },
 },
     { collection: "posts" }

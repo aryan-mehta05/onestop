@@ -1,12 +1,14 @@
 import axios from "axios";
-export const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER || "http://localhost:4000";
+
+const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER || "http://localhost:4000";
+const axiosWithCredentials = axios.create({ withCredentials: true });
 
 export const findAllPosts = async () => {
-    const response = await axios.get(`${REMOTE_SERVER}/api/posts/getAllPosts/`);
+    const response = await axiosWithCredentials.get(`${REMOTE_SERVER}/api/posts/getAllPosts/`);
     return response.data;
 }
 
 export const likePost = async (pid: string, uid: string) => {
-    const response = await axios.post(`${REMOTE_SERVER}/api/likes/likePost/`, { pid: pid, uid: uid });
+    const response = await axiosWithCredentials.post(`${REMOTE_SERVER}/api/likes/likePost/`, { pid: pid, uid: uid });
     return response.data;
 }

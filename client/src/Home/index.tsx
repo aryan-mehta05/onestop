@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react"
 import * as client from "./client";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Nav from "../Nav/index";
-import { setCurrentUser, setCurrentUserLikes } from "../SignIn/reducer";
+import { setCurrentUserLikes } from "../SignIn/reducer";
 import { Link } from "react-router-dom";
 
 export default function Home() {
     const dispatch = useDispatch();
     const { currentUser } = useSelector((state: any) => state.userReducer);
     const [userLikesObjects, setUserLikesObjects] = useState(currentUser.likes);
-    let userLikes: any ;
+    let userLikes: any;
     if (userLikesObjects) {
         userLikes = userLikesObjects.map((likeItem: any) => (
             likeItem.post
         ))
-    } else {userLikes = []}
+    } else { userLikes = [] }
     // const [userLikes, setUserLikes] = useState(currentUser.likes.map((likeItem:any) => (
     //     likeItem.post
     // )))
@@ -28,7 +27,6 @@ export default function Home() {
         const newLike = await client.likePost(pid, uid);
         setUserLikesObjects([...userLikesObjects, newLike]);
         dispatch(setCurrentUserLikes([...currentUser.likes, newLike]));
-
     }
     useEffect(() => {
         getAllPosts();
@@ -41,21 +39,22 @@ export default function Home() {
                 <div className="justify-center">Posts</div>
                 <br />
                 <ul>
-                    {posts && posts.length > 0 && posts.map((post: any) => (
-                        <li key={post._id} className="list-group-item border m-2">
-                            {/* <div>{post.photo}</div> */}
-                            {/* <img src={`${post.photo}`} alt="" /> */}
-                            <Link to={`/profile/${post.poster}`}>{post.poster}</Link>
-                            {/* <div>{post.poster}</div> */}
-                            <div>{post.caption}</div>
-                            <div>{post.destinationCity}, {post.destinationCountry}</div>
-                            {currentUser.username && !userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
-                            {currentUser.username && userLikes.includes(post._id) && <div>Liked!</div>}
-                        </li>
-                    ))}
+                    {posts && posts.length > 0 && posts.map((post: any) => {
+                        const imageData = "data:image/png;base64," + String.fromCharCode(...post.photo.data);
+
+                        return (
+                            <li key={post._id} className="list-group-item border m-2">
+                                {<img src={imageData} alt={post.destinationCountry} />}
+                                <Link to={`/profile/${post.poster}`}>{post.poster}</Link>
+                                <div>{post.caption}</div>
+                                <div><b>{post.destinationCity}, {post.destinationCountry}</b></div>
+                                {currentUser.username && !userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
+                                {currentUser.username && userLikes.includes(post._id) && <div>Liked!</div>}
+                            </li>
+                        )
+                    })}
                 </ul>
             </div>
         </div>
     )
-
 }
