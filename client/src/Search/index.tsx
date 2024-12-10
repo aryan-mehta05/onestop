@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import * as client from "./client";
-// import { useAuth } from '../Auth/AuthContext';
-// import { AuthProvider } from '../Auth/AuthContext';
+import React from "react";
+import { useSelector } from "react-redux";
+import Nav from "../Nav/index";
 
 export default function Search() {
     const [search_params, setSearch_params] = useState({ origin: "MAD", one_way: false, nonstop: false, max_price: 999999 });
     const [data, setData] = useState([{ "id": 1 }]);
     const [data_loaded, setData_loaded] = useState(false);
     const [history, setHistory] = useState([]);
-    // const auth = useAuth();
+    const { currentUser } = useSelector((state: any) => state.userReducer);
     const getFlightData = async (origin: string, one_way: boolean, nonstop: boolean, max_price?: number) => {
         try {
             const response = await client.get_flight_inspo_data(origin, one_way, nonstop, max_price);
@@ -33,13 +34,16 @@ export default function Search() {
         }
     };
     const getAllSearchHistory = async () => {
+        console.log(currentUser)
         const response = await client.findAllSearchHistory();
         setHistory(response)
     }
     return (
         <div>
             {/* <h1>{auth.user ? auth.user.loginId : 'No User!'}</h1> */}
+            <Nav/>
             <h1>Search</h1>
+            <h2>hello {currentUser.username}</h2>
             <form action="">
                 <label htmlFor="origin-input">Origin: </label>
                 <input id="origin-input" type="text" onChange={(e) => setSearch_params({ ...search_params, origin: e.target.value })} />
@@ -53,7 +57,7 @@ export default function Search() {
                 <label htmlFor="max-price-input">Max Price (optional): </label>
                 <input id="max-price-input" type="number" onChange={(e) => setSearch_params({ ...search_params, max_price: parseInt(e.target.value) })} />
                 <br /><br />
-                <button className="bg-os-red border border-os-red text-white px-3 py-2 rounded-md hover:scale-110 transition-transform" onClick={(e) => {
+                <button onClick={(e) => {
                     e.preventDefault();
                     if (!search_params.origin) {
                         alert("Please select an origin.")
@@ -81,7 +85,7 @@ export default function Search() {
                     </div>
                 ))}
             </ul>
-            <button className="bg-white border border-os-red text-os-red px-3 py-2 rounded-md hover:scale-110 transition-transform" onClick={(e) => {
+            <button onClick={(e) => {
                 e.preventDefault();
                 getAllSearchHistory();
             }}>

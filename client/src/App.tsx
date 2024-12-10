@@ -1,39 +1,36 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import Feed from "./Feed";
-import Home from "./Home";
-import SignIn from "./Auth/SignIn";
-import SignUp from "./Auth/SignUp";
-import { AuthProvider } from "./Auth/AuthContext";
-import { ProtectedRoute } from "./Auth/ProtectedRoute";
-import Search from "./Search";
-import SearchDetails from "./Search/Details"
-import SearchBarResults from "./Search/SearchBarResults";
-import Profile from "./Profile";
+import React from 'react';
+import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./Home/index";
+import SignIn from './SignIn/index';
+import SignUp from './SignUp/index';
+import Search from './Search/index';
+import Profile from './Profile/index';
+import SearchDetails from './Search/Details/index';
+import SearchBarResults from './Search/SearchBarResults/index';
+import { Provider } from 'react-redux';
+import store from './store';
+import CreatePost from './CreatePost/index';
+import ProtectedRoute from './SignIn/ProtectedRoute';
 
 function App() {
   return (
-    <AuthProvider>
+    <Provider store={store}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/search/:query" element={<SearchBarResults />} />
-          <Route path="/search" element={<Search />} />
+          <Route path="/signin/" element={<SignIn />} />
+          <Route path="/signup/" element={<SignUp />} />
+          <Route path="/search/:query" element={<ProtectedRoute><SearchBarResults /></ProtectedRoute>} />
+          <Route path="/search/" element={<ProtectedRoute><Search /></ProtectedRoute>} />
           <Route path="/details/:airportCode" element={<SearchDetails />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route
-            path="/feed"
-            element={
-              <ProtectedRoute>
-                <Feed />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/profile/" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/profile/:username" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/createPost/" element={<ProtectedRoute><CreatePost /></ProtectedRoute>} />
         </Routes>
       </Router>
-    </AuthProvider>
+    </Provider>
+
   );
 }
 
