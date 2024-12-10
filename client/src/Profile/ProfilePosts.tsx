@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react"
 import * as client from "./client";
-import React from "react";
 import * as homeClient from "../Home/client";
 import { useDispatch, useSelector } from "react-redux";
-import Nav from "../Nav/index";
-import { setCurrentUser, setCurrentUserLikes } from "../SignIn/reducer";
-import { Link } from "react-router-dom";
+import { setCurrentUserLikes } from "../SignIn/reducer";
 
 export default function ProfilePosts(profileUsername?: { profileUsername: any; }) {
     const dispatch = useDispatch();
@@ -17,7 +14,7 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
         userLikes = userLikesObjects.map((likeItem: any) => (
             likeItem.post
         ))
-    } else {userLikes = []}
+    } else { userLikes = [] }
     const getPostsForUser = async (user: String) => {
         if (profileUsername && profileUsername.profileUsername) {
             const response = await client.findPostsByUser(profileUsername.profileUsername);
@@ -41,17 +38,20 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
             <div className="justify-center">Posts</div>
             <br />
             <ul>
-                {posts && posts.length > 0 && posts.map((post: any) => (
-                    <li className="list-group-item border m-2">
-                        {/* <div>{post.photo}</div> */}
-                        {/* <img src={`${post.photo}`} alt="" /> */}
-                        <div>{post.poster}</div>
-                        <div>{post.caption}</div>
-                        <div>{post.destinationCity}, {post.destinationCountry}</div>
-                        {!userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
-                        {userLikes.includes(post._id) && <div>Liked!</div>}
-                    </li>
-                ))}
+                {posts && posts.length > 0 && posts.map((post: any) => {
+                    const imageData = "data:image/png;base64," + String.fromCharCode(...post.photo.data);
+
+                    return (
+                        <li className="list-group-item border m-2">
+                            {<img src={imageData} alt={post.destinationCountry} />}
+                            <div>{post.poster}</div>
+                            <div>{post.caption}</div>
+                            <div>{post.destinationCity}, {post.destinationCountry}</div>
+                            {!userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
+                            {userLikes.includes(post._id) && <div>Liked!</div>}
+                        </li>
+                    )
+                })}
             </ul>
         </div>
     )
