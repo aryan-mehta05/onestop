@@ -15,6 +15,12 @@ export default function SignIn() {
 
     const signin = async (e: any) => {
         e.preventDefault();
+
+        if (credentials.username === undefined || credentials.password === undefined) {
+            alert("Please enter your username and password!");
+            return;
+        }
+
         try {
             const user = await client.signin(credentials);
             const userLikes = await client.getUserLikes(user._id);
@@ -28,19 +34,9 @@ export default function SignIn() {
         }
     };
 
-    //   const handleSignIn = async (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     const success = await auth.signIn(username, password);
-    //     if (success) {
-    //       navigate('/feed');
-    //     } else {
-    //       setErrorMsg('Invalid username or password');
-    //     }
-    //   };
-
     return (
         <div className="flex flex-col items-center justify-center h-screen">
-            <Nav/>
+            <Nav />
             <h1 className="text-3xl mb-4">Sign In</h1>
             <form className="flex flex-col space-y-4">
                 <input

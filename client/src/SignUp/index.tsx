@@ -21,6 +21,11 @@ export default function SignUp() {
     const signup = async (event: any) => {
         event.preventDefault();
 
+        if (credentials.username === "" || credentials.password === "") {
+            alert("Please enter your username and password!");
+            return;
+        }
+
         try {
             const newUser = {
                 username: credentials.username,

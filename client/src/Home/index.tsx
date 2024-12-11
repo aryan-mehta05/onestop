@@ -28,6 +28,12 @@ export default function Home() {
         const newLike = await client.likePost(pid, uid);
         setUserLikesObjects([...userLikesObjects, newLike]);
         dispatch(setCurrentUserLikes([...currentUser.likes, newLike]));
+        setPostLikes((postLikes: any) => {
+            return {
+                ...postLikes,
+                [pid]: postLikes[pid] ? [...postLikes[pid], newLike] : [newLike]
+            };
+        });
     }
     const deletePost = async (pid: string) => {
         await client.deletePost(pid);
