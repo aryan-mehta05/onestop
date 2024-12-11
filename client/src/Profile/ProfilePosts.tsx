@@ -29,7 +29,12 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
         const newLike = await homeClient.likePost(pid, uid);
         setUserLikesObjects([...userLikesObjects, newLike]);
         dispatch(setCurrentUserLikes([...currentUser.likes, newLike]));
-
+    }
+    const deletePost = async (pid: string) => {
+        await homeClient.deletePost(pid);
+        setPosts(posts.filter((post: any) => {
+            return post._id !== pid
+        }));
     }
     useEffect(() => {
         getPostsForUser(currentUser);
@@ -65,6 +70,7 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
                             {!userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
                             {userLikes.includes(post._id) && <div>Liked!</div>}
                             {<div>{likeCount === undefined ? "Loading..." : `Likes: ${likeCount.length}`}</div>}
+                            {currentUser.username == post.poster && <button onClick={(() => deletePost(post._id))}>Delete</button>}
                         </li>
                     )
                 })}

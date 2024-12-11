@@ -10,7 +10,15 @@ export default function PostsRoutes(app) {
     app.post("/api/posts/createPost", createPost);
 
     const updatePost = async (request, response) => { };
-    const deletePost = async (request, response) => { };
+
+    const deletePost = async (request, response) => {
+        const { postId } = request.params;
+
+        await dao.deletePost(postId);
+
+        response.sendStatus(200);
+    };
+    app.delete("/api/posts/deletePost/:postId", deletePost)
 
     const getAllPosts = async (request, response) => {
         const posts = await dao.findAllPosts();

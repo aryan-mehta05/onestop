@@ -4,6 +4,10 @@ export function createPost(post) {
     return model.create(post);
 }
 
+export function deletePost(postId) {
+    return model.deleteOne({ _id: postId });
+}
+
 export function findAllPosts() {
     return model.find();
 }

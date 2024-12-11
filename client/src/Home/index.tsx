@@ -15,10 +15,9 @@ export default function Home() {
         userLikes = userLikesObjects.map((likeItem: any) => (
             likeItem.post
         ))
-    } else { userLikes = [] }
-    // const [userLikes, setUserLikes] = useState(currentUser.likes.map((likeItem:any) => (
-    //     likeItem.post
-    // )))
+    } else {
+        userLikes = []
+    }
     const [posts, setPosts] = useState<any>();
     const [postLikes, setPostLikes] = useState<any>([]);
     const getAllPosts = async () => {
@@ -29,6 +28,12 @@ export default function Home() {
         const newLike = await client.likePost(pid, uid);
         setUserLikesObjects([...userLikesObjects, newLike]);
         dispatch(setCurrentUserLikes([...currentUser.likes, newLike]));
+    }
+    const deletePost = async (pid: string) => {
+        await client.deletePost(pid);
+        setPosts(posts.filter((post: any) => {
+            return post._id !== pid
+        }));
     }
     useEffect(() => {
         getAllPosts();
@@ -68,6 +73,7 @@ export default function Home() {
                                 {currentUser.username && !userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
                                 {currentUser.username && userLikes.includes(post._id) && <div>Liked!</div>}
                                 {<div>{likeCount === undefined ? "Loading..." : `Likes: ${likeCount.length}`}</div>}
+                                {currentUser.username == post.poster && <button onClick={(() => deletePost(post._id))}>Delete</button>}
                             </li>
                         )
                     })}

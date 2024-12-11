@@ -18,6 +18,12 @@ export const likePost = async (pid: string, uid: string) => {
     return response.data;
 }
 
+export const deletePost = async(pid: string) => {
+    const response = await axiosWithCredentials.delete(`${POSTS_API}/deletePost/` + pid);
+
+    return response.data;
+}
+
 export const likes = async(pid: string) => {
     const response = await axiosWithCredentials.get(`${LIKES_API}/` + pid);
 
