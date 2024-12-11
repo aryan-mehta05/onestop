@@ -58,9 +58,9 @@ export default function ProfileInfo(profileUsername?: { profileUsername: any; })
                 <label htmlFor="role">Role:</label>
                 <select id="role" className="form-control"
                     onChange={((e) => { setUpdateUser({ ...updateUser, role: e.target.value }) })}>
-                    {currentUser.role === "ADMIN" ? <option selected value="ADMIN">ADMIN</option> : <option value="ADMIN">ADMIN</option>}
-                    {currentUser.role === "PREMIUM" ? <option selected value="PREMIUM">PREMIUM</option> : <option value="PREMIUM">PREMIUM</option>}
-                    {currentUser.role === "BASIC" ? <option selected value="BASIC">BASIC</option> : <option value="BASIC">BASIC</option>}
+                    {currentUser.role === "Guest" ? <option selected value="Guest">Guest</option> : <option value="Guest">Guest</option>}
+                    {currentUser.role === "User" ? <option selected value="User">User</option> : <option value="User">User</option>}
+                    {currentUser.role === "Admin" ? <option selected value="Admin">Admin</option> : <option value="Admin">Admin</option>}
                 </select>
                 <button onClick={(() => { setEditing(!editing) })}>Cancel</button>
                 <button onClick={(() => { saveProfileChanges() })}>Save</button>

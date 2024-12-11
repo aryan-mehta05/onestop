@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileFriends from "./ProfileFriends"
 import ProfileInfo from "./ProfileInfo"
 import ProfilePosts from "./ProfilePosts"
@@ -42,7 +42,7 @@ export default function Profile() {
             <Nav />
             <h1>Profile</h1>
             {!profileUsername && <Link to="/createPost">
-                {currentUser.role !== "BASIC" && <button>Create New Post</button>}
+                {currentUser.role !== "Guest" && <button>Create New Post</button>}
             </Link>}
             {profileUsername && profileUser && !userFriends.includes(profileUser._id) && <button onClick={(() => { followFriend() })}>Follow</button>}
             {profileUsername && profileUser && userFriends.includes(profileUser._id) && <div>Followed!</div>}

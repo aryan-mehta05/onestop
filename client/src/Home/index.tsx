@@ -73,7 +73,7 @@ export default function Home() {
                                 {currentUser.username && !userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
                                 {currentUser.username && userLikes.includes(post._id) && <div>Liked!</div>}
                                 {<div>{likeCount === undefined ? "Loading..." : `Likes: ${likeCount.length}`}</div>}
-                                {currentUser.username == post.poster && <button onClick={(() => deletePost(post._id))}>Delete</button>}
+                                {(currentUser.role === "Admin" || currentUser.username == post.poster) && <button onClick={(() => deletePost(post._id))}>Delete</button>}
                             </li>
                         )
                     })}

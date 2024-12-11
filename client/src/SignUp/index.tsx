@@ -9,8 +9,12 @@ import * as signupClient from "./client"
 
 export default function SignUp() {
     const { currentUser } = useSelector((state: any) => state.userReducer);
-    const [credentials, setCredentials] = useState<any>({});
-    const [errorMsg, setErrorMsg] = useState('');
+    const [credentials, setCredentials] = useState({
+        username: "",
+        password: "",
+        role: "User"
+    });
+    const [errorMsg, setErrorMsg] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -25,7 +29,7 @@ export default function SignUp() {
                 lastName: "",
                 email: "",
                 dob: "",
-                role: "USER",
+                role: credentials.role,
                 loginId: "",
                 lastActivity: "",
                 totalActivity: ""
@@ -64,14 +68,22 @@ export default function SignUp() {
                     onChange={(event) => setCredentials({ ...credentials, password: event.target.value })}
                     className="border px-4 py-2 rounded"
                 />
+                <select
+                    onChange={(event) => setCredentials({ ...credentials, role: event.target.value })}
+                    className="border px-4 py-2 rounded"
+                >
+                    <option value="Guest">Guest</option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                </select>
                 {errorMsg && <p className="text-red-500">{errorMsg}</p>}
                 <button onClick={signup}>
                     Sign Up
                 </button>
-                <button onClick={() => navigate('/signin')} >
+                <button onClick={() => navigate("/signin")} >
                     Have an account already? Sign In!
                 </button>
-                <button onClick={() => navigate('/')} >
+                <button onClick={() => navigate("/")} >
                     Back to the Home Screen
                 </button>
             </form>
