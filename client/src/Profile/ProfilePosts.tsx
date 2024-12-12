@@ -9,6 +9,19 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
     const { currentUser } = useSelector((state: any) => state.userReducer);
     const [posts, setPosts] = useState<any>();
     const [postLikes, setPostLikes] = useState<any>([]);
+    const [editing, setEditing] = useState<boolean>(false);
+    const [newCaption, setNewCaption] = useState<string>("");
+    const [newDestinationCity, setNewDestinationCity] = useState<string>("");
+    const [newDestinationCountry, setNewDestinationCountry] = useState<string>("");
+    const handleCaptionChange = (event: any) => {
+        setNewCaption(event.target.value);
+    }
+    const handleDestinationCityChange = (event: any) => {
+        setNewDestinationCity(event.target.value);
+    }
+    const handleDestinationCountryChange = (event: any) => {
+        setNewDestinationCountry(event.target.value);
+    }
     const [userLikesObjects, setUserLikesObjects] = useState(currentUser.likes);
     let userLikes: any;
     if (userLikesObjects) {
@@ -35,6 +48,9 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
         setPosts(posts.filter((post: any) => {
             return post._id !== pid
         }));
+    }
+    const updatePost = async (newPost: any) => {
+        await homeClient.updatePost(newPost);
     }
     useEffect(() => {
         getPostsForUser(currentUser);
@@ -65,11 +81,42 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
                         <li className="list-group-item border m-2">
                             {<img src={imageData} alt={post.destinationCountry} />}
                             <div>{post.poster}</div>
-                            <div>{post.caption}</div>
-                            <div><b>{post.destinationCity}, {post.destinationCountry}</b></div>
+                            {!editing ? <div>{post.caption}</div> : <div><input id="caption" value={newCaption} onChange={handleCaptionChange} /></div>}
+                            {!editing ? <div><b>{post.destinationCity}, {post.destinationCountry}</b></div> : <div><input id="destinationCity" value={newDestinationCity} onChange={handleDestinationCityChange} />, <input id="destinationCountry" value={newDestinationCountry} onChange={handleDestinationCountryChange} /></div>}
                             {Object.keys(currentUser).length > 0 && !userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
                             {Object.keys(currentUser).length > 0 && userLikes.includes(post._id) && <div>Liked!</div>}
                             {<div>{likeCount === undefined ? "Loading..." : `Likes: ${likeCount.length}`}</div>}
+                            {(currentUser.username == post.poster) && !editing ?
+                                <button onClick={(() => {
+                                    setNewCaption(post.caption);
+                                    setNewDestinationCity(post.destinationCity);
+                                    setNewDestinationCountry(post.destinationCountry);
+
+                                    setEditing(true);
+                                })}>Edit</button>
+                                :
+                                <button onClick={(() => {
+                                    setPosts(posts.filter(async (p: any) => {
+                                        if (p._id !== post._id) {
+                                            return p;
+                                        }
+
+                                        p.caption = newCaption;
+                                        p.destinationCity = newDestinationCity;
+                                        p.destinationCountry = newDestinationCountry;
+
+                                        await updatePost(p);
+
+                                        setEditing(false);
+
+                                        setNewCaption("");
+                                        setNewDestinationCity("");
+                                        setNewDestinationCountry("");
+
+                                        return p;
+                                    }));
+                                })}>Update</button>
+                            }
                             {(currentUser.role === "Admin" || currentUser.username == post.poster) && <button onClick={(() => deletePost(post._id))}>Delete</button>}
                         </li>
                     )

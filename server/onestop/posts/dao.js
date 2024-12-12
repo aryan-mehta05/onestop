@@ -4,6 +4,10 @@ export function createPost(post) {
     return model.create(post);
 }
 
+export function updatePost(post) {
+    return model.findOneAndUpdate({ _id: post._id }, { $set: post });
+}
+
 export function deletePost(postId) {
     return model.deleteOne({ _id: postId });
 }
@@ -38,8 +42,4 @@ export function findPostsByQuery(query) {
             { caption: queryRegExp }
         ]
     });
-}
-
-export function updatePost(postId, postUpdates) {
-    return model.findOneAndUpdate({ _id: postId }, { $set: postUpdates });
 }

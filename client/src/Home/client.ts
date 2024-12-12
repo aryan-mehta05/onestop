@@ -24,6 +24,12 @@ export const deletePost = async(pid: string) => {
     return response.data;
 }
 
+export const updatePost = async(post: any) => {
+    const response = await axiosWithCredentials.put(`${POSTS_API}/updatePost/`, post);
+
+    return response.data;
+}
+
 export const likes = async(pid: string) => {
     const response = await axiosWithCredentials.get(`${LIKES_API}/` + pid);
 

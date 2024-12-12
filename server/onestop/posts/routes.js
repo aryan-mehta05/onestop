@@ -9,7 +9,14 @@ export default function PostsRoutes(app) {
     };
     app.post("/api/posts/createPost", createPost);
 
-    const updatePost = async (request, response) => { };
+    const updatePost = async (request, response) => {
+        const post = request.body;
+
+        await dao.updatePost(post);
+
+        response.sendStatus(200);
+    };
+    app.put("/api/posts/updatePost", updatePost);
 
     const deletePost = async (request, response) => {
         const { postId } = request.params;
