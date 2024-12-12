@@ -11,5 +11,11 @@ body {
 }
 
 .post-card {
-  max-width: 500px;
+  width: 500px;
+}
+
+.post-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
