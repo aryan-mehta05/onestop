@@ -25,7 +25,7 @@ export default function ProfileFriends(profileUsername?: { profileUsername: any 
             <ul>
                 {friends && friends.length > 0 && friends.map((friend: any) => (
                     <li className="border">
-                        <div>{friend.user2.username}</div>
+                        <div><a href={`/profile/${friend.user2.username}`}>{friend.user2.username}</a></div>
                         <div>{friend.user2.firstName}</div>
                         <div>{friend.user2.lastName}</div>
                         <div>{friend.user2.email}</div>
