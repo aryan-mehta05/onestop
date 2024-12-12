@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Nav() {
+    const {pathname} = useLocation();
     const { currentUser } = useSelector((state: any) => state.userReducer);
     let links = [
         { label: "Home", path: "/" },
@@ -24,11 +25,15 @@ export default function Nav() {
 
     return (
         <div>
-            {links.map((link) => (
-                <Link key={link.path} to={link.path}>
-                    {link.label}
-                </Link>
-            ))}
+            <ul className="nav nav-tabs">
+                {links.map((link) => (
+                    <li className="nav-item">
+                        <Link key={link.path} to={link.path} className={`nav-link ${pathname.endsWith(link.path) ? "active" : ""}`}>
+                            {link.label}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }

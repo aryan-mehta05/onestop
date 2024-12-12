@@ -9,7 +9,7 @@ export function deletePost(postId) {
 }
 
 export function findAllPosts() {
-    return model.find();
+    return model.find().sort({ _id: -1 });
 }
 
 export function findPostsByUsername(username) {
