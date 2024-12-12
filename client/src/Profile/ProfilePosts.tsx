@@ -66,9 +66,9 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
                             {<img src={imageData} alt={post.destinationCountry} />}
                             <div>{post.poster}</div>
                             <div>{post.caption}</div>
-                            <div>{post.destinationCity}, {post.destinationCountry}</div>
-                            {!userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
-                            {userLikes.includes(post._id) && <div>Liked!</div>}
+                            <div><b>{post.destinationCity}, {post.destinationCountry}</b></div>
+                            {Object.keys(currentUser).length > 0 && !userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
+                            {Object.keys(currentUser).length > 0 && userLikes.includes(post._id) && <div>Liked!</div>}
                             {<div>{likeCount === undefined ? "Loading..." : `Likes: ${likeCount.length}`}</div>}
                             {(currentUser.role === "Admin" || currentUser.username == post.poster) && <button onClick={(() => deletePost(post._id))}>Delete</button>}
                         </li>

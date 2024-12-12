@@ -41,13 +41,13 @@ export default function Profile() {
     return (
         <div >
             <Nav />
-            <HeaderLogo/>
+            <HeaderLogo />
             <h1>Profile</h1>
             {!profileUsername && <Link to="/createPost">
                 {currentUser.role !== "Guest" && <button>Create New Post</button>}
             </Link>}
-            {profileUsername && profileUser && !userFriends.includes(profileUser._id) && <button onClick={(() => { followFriend() })}>Follow</button>}
-            {profileUsername && profileUser && userFriends.includes(profileUser._id) && <div>Followed!</div>}
+            {Object.keys(currentUser).length > 0 && profileUsername && profileUser && !userFriends.includes(profileUser._id) && <button onClick={(() => { followFriend() })}>Follow</button>}
+            {Object.keys(currentUser).length > 0 && profileUsername && profileUser && userFriends.includes(profileUser._id) && <div>Followed!</div>}
 
             <div className="flex w-full h-screen">
                 <ProfileInfo profileUsername={profileUsername as string} />
