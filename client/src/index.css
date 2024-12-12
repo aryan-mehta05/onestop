@@ -9,3 +9,7 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+.post-card {
+  max-width: 500px;
+}

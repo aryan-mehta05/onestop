@@ -6,6 +6,7 @@ import Nav from "../Nav/index";
 import * as profileClient from "../Profile/client"
 import * as signinClient from "../SignIn/client"
 import * as signupClient from "./client"
+import HeaderLogo from "../Home/HeaderLogo";
 
 export default function SignUp() {
     const { currentUser } = useSelector((state: any) => state.userReducer);
@@ -57,6 +58,7 @@ export default function SignUp() {
     return (
         <div className="flex flex-col items-center justify-center h-screen">
             <Nav />
+            <HeaderLogo/>
             <h1 className="text-3xl mb-4">Sign Up</h1>
             <form className="flex flex-col space-y-4">
                 <input

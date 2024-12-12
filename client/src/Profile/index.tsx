@@ -7,6 +7,7 @@ import Nav from "../Nav/index";
 import { Link, useParams } from "react-router-dom";
 import * as client from "./client";
 import { setCurrentUserFriends } from "../SignIn/reducer";
+import HeaderLogo from "../Home/HeaderLogo";
 
 export default function Profile() {
     const dispatch = useDispatch();
@@ -40,6 +41,7 @@ export default function Profile() {
     return (
         <div >
             <Nav />
+            <HeaderLogo/>
             <h1>Profile</h1>
             {!profileUsername && <Link to="/createPost">
                 {currentUser.role !== "Guest" && <button>Create New Post</button>}

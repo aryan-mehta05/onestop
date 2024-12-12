@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Nav() {
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
     const { currentUser } = useSelector((state: any) => state.userReducer);
     let links = [
         { label: "Home", path: "/" },
@@ -24,7 +24,7 @@ export default function Nav() {
     }
 
     return (
-        <div>
+        <div className="float-end">
             <ul className="nav nav-tabs">
                 {links.map((link) => (
                     <li className="nav-item">

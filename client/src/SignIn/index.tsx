@@ -5,6 +5,7 @@ import * as client from "./client";
 import * as profileClient from "../Profile/client";
 import { setCurrentUser, setCurrentUserLikes, setCurrentUserFriends } from './reducer';
 import Nav from "../Nav/index";
+import HeaderLogo from '../Home/HeaderLogo';
 
 export default function SignIn() {
     const { currentUser } = useSelector((state: any) => state.userReducer);
@@ -37,6 +38,7 @@ export default function SignIn() {
     return (
         <div className="flex flex-col items-center justify-center h-screen">
             <Nav />
+            <HeaderLogo/>
             <h1 className="text-3xl mb-4">Sign In</h1>
             <form className="flex flex-col space-y-4">
                 <input

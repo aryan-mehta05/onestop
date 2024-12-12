@@ -33,6 +33,7 @@ export default function ProfileInfo(profileUsername?: { profileUsername: any; })
     return (
         <div className="w-3/12 flex justify-center relative overflow-hidden">
             <div>Profile Info</div>
+            <img src="images/profile-pic.jpg" alt="" />
             <img src="" alt="" />
             {!editing && <div>
                 {profileUsername && profileUsername.profileUsername && profileUser ? <div>{profileUser.firstName}</div> : <div>{currentUser.firstName}</div>}
