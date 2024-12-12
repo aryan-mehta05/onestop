@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import * as client from "./client";
+import { Link } from "react-router-dom";
 
 export default function ProfileFriends(profileUsername?: { profileUsername: any }) {
     const { currentUser } = useSelector((state: any) => state.userReducer);
@@ -25,7 +26,7 @@ export default function ProfileFriends(profileUsername?: { profileUsername: any 
             <ul>
                 {friends && friends.length > 0 && friends.map((friend: any) => (
                     <li className="border">
-                        <div><a href={`/profile/${friend.user2.username}`}>{friend.user2.username}</a></div>
+                        <div><Link to={`/profile/${friend.user2.username}`}>{friend.user2.username}</Link></div>
                         <div>{friend.user2.firstName}</div>
                         <div>{friend.user2.lastName}</div>
                         <div>{friend.user2.email}</div>
