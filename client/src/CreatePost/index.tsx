@@ -3,6 +3,7 @@ import Nav from "../Nav/index";
 import { useSelector } from "react-redux";
 import * as client from "./client";
 import { useNavigate } from "react-router-dom";
+import HeaderLogo from "../Home/HeaderLogo";
 
 export default function CreatePost() {
     const { currentUser } = useSelector((state: any) => state.userReducer);
@@ -64,28 +65,37 @@ export default function CreatePost() {
     return (
         <div>
             <Nav />
-            <h1>Create New Post</h1>
-            <form >
-                <label htmlFor="destinationCity">Destination City:</label>
-                <input id="destinationCity" type="text" onChange={((e) => setDestinationCity(e.target.value))}
-                />
-                <br />
-                <label htmlFor="destinationCountry">Destination Country:</label>
-                <input id="destinationCountry" type="text" onChange={((e) => setDestinationCountry(e.target.value))}
-                />
-                <br />
-                <label htmlFor="caption">Caption:</label>
-                <textarea id="caption" onChange={((e) => setCaption(e.target.value))}
-                />
-                <br />
-                <label htmlFor="picture">Show us a picture from your trip!:</label>
-                <input
-                    accept="image/png"
-                    onChange={(event: any) => handleFileChange(event.target.files[0])}
-                    type="file"
-                />
-            </form>
-            <button onClick={submitPost}>Submit</button>
+            <HeaderLogo />
+            <div className="post-list">
+                <div className="card post-card p-4">
+                    <h1>Create New Post</h1>
+                    <form >
+                        <label className="form-label me-2" htmlFor="destinationCity">Destination City:</label>
+                        <input className="border px-4 py-2 rounded mb-2" id="destinationCity" type="text" onChange={((e) => setDestinationCity(e.target.value))}
+                        />
+                        <br />
+                        <label className="form-label me-2" htmlFor="destinationCountry">Destination Country:</label>
+                        <input className="border px-4 py-2 rounded" id="destinationCountry" type="text" onChange={((e) => setDestinationCountry(e.target.value))}
+                        />
+                        <br />
+                        <label className="form-label" htmlFor="caption">Caption:</label>
+                        <textarea className="form-control" id="caption" rows={10} onChange={((e) => setCaption(e.target.value))}
+                        />
+                        <br />
+                        <label htmlFor="picture">Show us a picture from your trip!:</label>
+                        <input
+                            accept="image/png"
+                            onChange={(event: any) => handleFileChange(event.target.files[0])}
+                            type="file"
+                        />
+                    </form>
+
+                    <div>
+                        <button className="btn btn-primary float-end" onClick={submitPost}>Submit</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
     )
 }
