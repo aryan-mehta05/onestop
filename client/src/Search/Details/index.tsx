@@ -42,7 +42,7 @@ export default function SearchDetails() {
         <div>
             <Nav />
             <HeaderLogo />
-            {locationData && <h3>Here are some recent posts related to {locationData.address.cityName}, {locationData.address.countryName}</h3>}
+            {locationData && <h3 className="mx-4 mt-2">Here are some recent posts related to {locationData.address.cityName}, {locationData.address.countryName}:</h3>}
             <ul className="post-list list-group">
                 {posts && posts.map((post: any) => {
                     const imageData = "data:image/png;base64," + String.fromCharCode(...post.photo.data);
