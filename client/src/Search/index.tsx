@@ -105,8 +105,8 @@ export default function Search() {
                             <li className="list-group-item">
                                 <div>Origin: <b>{object.origin}</b></div>
                                 <div>Destination: <b>{object.destination}</b></div>
-                                <div>Departure Date: <b>{object.departureDate.substring(0, 10)}</b></div>
-                                <div>Return Date: <b>{object.returnDate.substring(0, 10)}</b></div>
+                                <div>Departure Date: <b>{object.departureDate}</b></div>
+                                <div>Return Date: <b>{object.returnDate}</b></div>
                                 {object && object.price && <div>Price: <b>{object.price}</b></div>}
                                 <Link className="float-end me-2" to={`/details/${object.destination}`}><button>Get More Inspiration!</button></Link>
                             </li>
