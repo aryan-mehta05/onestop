@@ -47,7 +47,7 @@ export default function Search() {
                 <div className="card post-card p-4 mb-4 ms-4">
                     <h1>Search</h1>
                     <form>
-                        <label className="form-label" htmlFor="origin-input">Origin: </label>
+                        <label className="form-label" htmlFor="origin-input">Origin (Airport Code): </label>
                         <input className="border px-2 rounded ms-2" id="origin-input" type="text" onChange={(e) => setSearch_params({ ...search_params, origin: e.target.value })} />
                         <br />
                         <label className="form-label" htmlFor="one-way-input">One Way? </label>
