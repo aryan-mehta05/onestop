@@ -32,7 +32,7 @@ export default function ProfileInfo(profileUsername?: { profileUsername: any; })
     }, []);
     return (
         <div className="card ms-4">
-            <img className="m-2" src="images/profile-pic.jpg" alt="" />
+            <img className="m-2" src="/images/profile-pic.jpg" alt="" />
             {!editing && <div>
                 <div className="m-2">
                     {profileUsername && profileUsername.profileUsername && profileUser ? <div><b>{profileUser.firstName} {profileUser.lastName}</b></div> : <div><b>{currentUser.firstName} {currentUser.lastName}</b></div>}

@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import * as searchClient from "../client"
 import Nav from "../../Nav/index";
 import { useSelector } from "react-redux";
+import HeaderLogo from "../../Home/HeaderLogo";
 
 export default function SearchDetails() {
     const { currentUser } = useSelector((state: any) => state.userReducer);
@@ -39,6 +40,7 @@ export default function SearchDetails() {
     return (
         <div>
             <Nav />
+            <HeaderLogo />
             <h1>Search Results</h1>
             {locationData && locationData != -1 &&<h2>{JSON.stringify(locationData.address.cityName)}</h2>}
             {locationData && locationData != -1 && <h2>{JSON.stringify(locationData.address.countryName)}</h2>}
