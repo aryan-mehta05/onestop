@@ -69,7 +69,7 @@ export default function Home() {
                 <hr />
             </div>
             <div className="row">
-                <h1 className="m-3">Hi{Object.keys(currentUser).length > 0 ? ` ${currentUser.firstName}` : ""}!</h1>
+                <h1 className="m-3">Hi{Object.keys(currentUser).length > 0 ? ` ${currentUser.username}` : ""}!</h1>
             </div>
             <hr />
             <ul className="post-list list-group">
