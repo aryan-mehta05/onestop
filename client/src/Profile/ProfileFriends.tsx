@@ -20,18 +20,17 @@ export default function ProfileFriends(profileUsername?: { profileUsername: any 
         findFriendsByUsername(currentUser.username);
     }, []);
     return (
-        <div className="w-3/12">
-            <div className="justify-center">Friends</div>
-            <br />
+        <div className="card me-4">
+            <h2 className="text-center">Friends</h2>
             <ul>
                 {friends && friends.length > 0 && friends.map((friend: any) => (
-                    <li className="border">
-                        <div><Link to={`/profile/${friend.user2.username}`}>{friend.user2.username}</Link></div>
-                        <div>{friend.user2.firstName}</div>
-                        <div>{friend.user2.lastName}</div>
-                        <div>{friend.user2.email}</div>
-                        <div>{friend.user2.role}</div>
-                        <div>{friend.user2.dob}</div>
+                    <li className="card my-2 me-4">
+                        <div className="mx-2"><Link to={`/profile/${friend.user2.username}`}>{friend.user2.username}</Link></div>
+                        <div className="mx-2">{friend.user2.firstName}</div>
+                        <div className="mx-2">{friend.user2.lastName}</div>
+                        {/* <div>{friend.user2.email}</div> */}
+                        <div className="mx-2">{friend.user2.role}</div>
+                        {/* <div>{friend.user2.dob}</div> */}
                     </li>
                 ))}
             </ul>

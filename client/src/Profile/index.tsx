@@ -47,21 +47,21 @@ export default function Profile() {
                 </div>
                 <hr />
             </div>
-            {profileUser && Object.keys(profileUser).length > 0 && <h1>{profileUser.username}'s Profile</h1>}
-            {!profileUsername && <Link to="/createPost">
-                {currentUser.role !== "Guest" && <button>Create New Post</button>}
-            </Link>}
+            {profileUser && Object.keys(profileUser).length > 0 && <h1 className="mx-4">{profileUser.username}'s Profile</h1>}
             {Object.keys(currentUser).length > 0 && profileUsername && profileUser && !userFriends.includes(profileUser._id) && <button onClick={(() => { followFriend() })}>Follow</button>}
             {Object.keys(currentUser).length > 0 && profileUsername && profileUser && userFriends.includes(profileUser._id) && <div>Followed!</div>}
 
             <div className="row">
                 <div className="col-12 col-md-4 col-lg-2">
                     <ProfileInfo profileUsername={profileUsername as string} />
+                    {!profileUsername && <Link className="ms-4 my-2 btn btn-primary" to="/createPost">
+                        {currentUser.role !== "Guest" && <button>Create New Post</button>}
+                    </Link>}
                 </div>
-                <div className="col-12 col-md-8 col-lg-8">
+                <div className="col-12 col-md-8 col-lg-7">
                     <ProfilePosts profileUsername={profileUsername as string} />
                 </div>
-                <div className="col-12 col-md-12 col-lg-2">
+                <div className="col-12 col-md-12 col-lg-3">
                     <ProfileFriends profileUsername={profileUsername as string} />
                 </div>
             </div>

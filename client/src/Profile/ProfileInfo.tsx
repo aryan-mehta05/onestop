@@ -31,31 +31,32 @@ export default function ProfileInfo(profileUsername?: { profileUsername: any; })
         findUserByUsername(currentUser.username);
     }, []);
     return (
-        <div className="w-3/12 flex justify-center relative overflow-hidden">
-            <div>Profile Info</div>
-            <img src="images/profile-pic.jpg" alt="" />
-            <img src="" alt="" />
+        <div className="card ms-4">
+            <img className="m-2" src="images/profile-pic.jpg" alt="" />
             {!editing && <div>
-                {profileUsername && profileUsername.profileUsername && profileUser ? <div>{profileUser.firstName}</div> : <div>{currentUser.firstName}</div>}
-                {profileUsername && profileUsername.profileUsername && profileUser ? <div>{profileUser.lastName}</div> : <div>{currentUser.lastName}</div>}
-                {profileUsername && profileUsername.profileUsername && profileUser ? <div>{profileUser.email}</div> : <div>{currentUser.email}</div>}
-                {profileUsername && profileUsername.profileUsername && profileUser ? <div>{profileUser.username}</div> : <div>{currentUser.username}</div>}
-                {profileUsername && profileUsername.profileUsername && profileUser ? <div>{profileUser.role}</div> : <div>{currentUser.role}</div>}
-                {profileUsername && !profileUsername.profileUsername && <button onClick={(() => { setEditing(!editing) })}>Edit Profile Info</button>}
+                <div className="m-2">
+                    {profileUsername && profileUsername.profileUsername && profileUser ? <div><b>{profileUser.firstName} {profileUser.lastName}</b></div> : <div><b>{currentUser.firstName} {currentUser.lastName}</b></div>}
+                    {/* {profileUsername && profileUsername.profileUsername && profileUser ? <div>{profileUser.lastName}</div> : <div>{currentUser.lastName}</div>} */}
+                    {profileUsername && profileUsername.profileUsername && profileUser ? <div>email: <b>{profileUser.email}</b></div> : <div>email: <b>{currentUser.email}</b></div>}
+                    {profileUsername && profileUsername.profileUsername && profileUser ? <div>username: <b>{profileUser.username}</b></div> : <div>username: <b>{currentUser.username}</b></div>}
+                    {profileUsername && profileUsername.profileUsername && profileUser ? <div>role: <b>{profileUser.role}</b></div> : <div>role: <b>{currentUser.role}</b></div>}
+                    {profileUsername && !profileUsername.profileUsername && <button className="btn btn-primary" onClick={(() => { setEditing(!editing) })}>Edit Profile Info</button>}
+                </div>
+
             </div>}
             {editing && <div>
-                <label htmlFor="first_name">First Name:</label>
-                <input id="first_name" type="text" defaultValue={currentUser.firstName}
+                <label className="form-label" htmlFor="first_name">First Name:</label>
+                <input className="form-control" id="first_name" type="text" defaultValue={currentUser.firstName}
                     onChange={((e) => { setUpdateUser({ ...updateUser, firstName: e.target.value }) })} />
                 <br />
-                <label htmlFor="last_name">Last Name:</label>
-                <input id="last_name" type="text" defaultValue={currentUser.lastName}
+                <label className="form-label" htmlFor="last_name">Last Name:</label>
+                <input className="form-control" id="last_name" type="text" defaultValue={currentUser.lastName}
                     onChange={((e) => { setUpdateUser({ ...updateUser, lastName: e.target.value }) })} />
                 <br />
-                <label htmlFor="email">Email:</label>
-                <input id="email" type="email" defaultValue={currentUser.email}
+                <label className="form-label" htmlFor="email">Email:</label>
+                <input className="form-control" id="email" type="email" defaultValue={currentUser.email}
                     onChange={((e) => { setUpdateUser({ ...updateUser, email: e.target.value }) })} />
-                <div>{currentUser.username}</div>
+                <div><b>{currentUser.username}</b></div>
                 <label htmlFor="role">Role:</label>
                 <select id="role" className="form-control"
                     onChange={((e) => { setUpdateUser({ ...updateUser, role: e.target.value }) })}>
@@ -63,8 +64,8 @@ export default function ProfileInfo(profileUsername?: { profileUsername: any; })
                     {currentUser.role === "User" ? <option selected value="User">User</option> : <option value="User">User</option>}
                     {currentUser.role === "Admin" ? <option selected value="Admin">Admin</option> : <option value="Admin">Admin</option>}
                 </select>
-                <button onClick={(() => { setEditing(!editing) })}>Cancel</button>
-                <button onClick={(() => { saveProfileChanges() })}>Save</button>
+                <button className="btn btn-success m-2 float-end" onClick={(() => { saveProfileChanges() })}>Save</button>
+                <button className="btn btn-danger m-2 float-end" onClick={(() => { setEditing(!editing) })}>Cancel</button>
             </div>}
         </div>
     )

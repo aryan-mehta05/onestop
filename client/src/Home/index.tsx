@@ -79,13 +79,15 @@ export default function Home() {
                     return (
                         <li key={post._id} className="post-card m-2 card mw-10">
                             {<img src={imageData} alt={post.destinationCountry} className="m-4" />}
-                            <Link to={`/profile/${post.poster}`} className="m-2">{post.poster}</Link>
-                            <div className="m-4">{post.caption}</div>
-                            <div className="mx-4"><b>{post.destinationCity}, {post.destinationCountry}</b></div>
-                            {Object.keys(currentUser).length > 0 && currentUser.username && !userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
-                            {Object.keys(currentUser).length > 0 && currentUser.username && userLikes.includes(post._id) && <div>Liked!</div>}
-                            {<div>{likeCount === undefined ? "Loading..." : `Likes: ${likeCount.length}`}</div>}
-                            {(currentUser.role === "Admin" || currentUser.username == post.poster) && <button onClick={(() => deletePost(post._id))} className="float-end btn btn-danger m-4">Delete</button>}
+                            <div className="card-body">
+                                <Link to={`/profile/${post.poster}`} className="m-2">{post.poster}</Link>
+                                <div className="m-4">{post.caption}</div>
+                                <div className="mx-4"><b>{post.destinationCity}, {post.destinationCountry}</b></div>
+                                {Object.keys(currentUser).length > 0 && currentUser.username && !userLikes.includes(post._id) && <button onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
+                                {Object.keys(currentUser).length > 0 && currentUser.username && userLikes.includes(post._id) && <div>Liked!</div>}
+                                {<div>{likeCount === undefined ? "Loading..." : `Likes: ${likeCount.length}`}</div>}
+                                {(currentUser.role === "Admin" || currentUser.username == post.poster) && <button onClick={(() => deletePost(post._id))} className="float-end btn btn-danger m-4">Delete</button>}
+                            </div>
                         </li>
                     )
                 })}
