@@ -40,9 +40,14 @@ export default function Profile() {
     }, []);
     return (
         <div >
-            <Nav />
-            <HeaderLogo />
-            <h1>Profile</h1>
+            <div className="row">
+                <div>
+                    <Nav />
+                    <HeaderLogo />
+                </div>
+                <hr />
+            </div>
+            {profileUser && Object.keys(profileUser).length > 0 && <h1>{profileUser.username}'s Profile</h1>}
             {!profileUsername && <Link to="/createPost">
                 {currentUser.role !== "Guest" && <button>Create New Post</button>}
             </Link>}
