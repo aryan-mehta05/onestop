@@ -54,10 +54,16 @@ export default function Profile() {
             {Object.keys(currentUser).length > 0 && profileUsername && profileUser && !userFriends.includes(profileUser._id) && <button onClick={(() => { followFriend() })}>Follow</button>}
             {Object.keys(currentUser).length > 0 && profileUsername && profileUser && userFriends.includes(profileUser._id) && <div>Followed!</div>}
 
-            <div className="flex">
-                <ProfileInfo profileUsername={profileUsername as string} />
-                <ProfilePosts profileUsername={profileUsername as string} />
-                <ProfileFriends profileUsername={profileUsername as string} />
+            <div className="row">
+                <div className="col-12 col-md-4 col-lg-2">
+                    <ProfileInfo profileUsername={profileUsername as string} />
+                </div>
+                <div className="col-12 col-md-8 col-lg-8">
+                    <ProfilePosts profileUsername={profileUsername as string} />
+                </div>
+                <div className="col-12 col-md-12 col-lg-2">
+                    <ProfileFriends profileUsername={profileUsername as string} />
+                </div>
             </div>
         </div>
     )
