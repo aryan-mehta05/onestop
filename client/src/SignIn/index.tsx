@@ -36,41 +36,54 @@ export default function SignIn() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
+        <div className="flex">
             <Nav />
-            <HeaderLogo/>
-            <h1 className="text-3xl mb-4">Sign In</h1>
-            <form className="flex flex-col space-y-4">
-                <input
-                    type="text"
-                    placeholder="Username"
-                    defaultValue={credentials.username}
-                    onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-                    className="border px-4 py-2 rounded"
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    defaultValue={credentials.password}
-                    onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-                    className="border px-4 py-2 rounded"
-                />
-                {errorMsg && <p className="text-red-500">{errorMsg}</p>}
-                <button onClick={signin}>
-                    Sign In
-                </button>
-                <button
-                    onClick={() => navigate('/signup')}
-                >
-                    Don't have an account? Sign Up!
-                </button>
-                <button
-                    onClick={() => navigate('/')}
-                >
-                    Back to Home Screen
-                </button>
-            </form>
-            <div>hello {currentUser.username}</div>
+            <HeaderLogo />
+            <div className='post-list'>
+                <div className='card post-card'>
+                    <h1 className="mb-4 text-center">Sign In</h1>
+                    <form className="">
+                        <div className='text-center'>
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                defaultValue={credentials.username}
+                                onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+                                className="border px-4 py-2 rounded"
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                defaultValue={credentials.password}
+                                onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+                                className="border px-4 py-2 rounded"
+                            />
+                            {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+                        </div>
+                        <div className=''>
+                            <button className='btn btn-primary mx-4 my-2' onClick={signin}>
+                                Sign In
+                            </button>
+                            <button
+                                className='btn mx-4 my-2 float-end'
+                                onClick={() => navigate('/signup')}
+                            >
+                                Don't have an account? Sign Up!
+                            </button>
+                            <br />
+                            <button
+                                className='btn btn-secondary mx-4 mb-2 float-end'
+                                onClick={() => navigate('/')}
+                            >
+                                Back to Home Screen
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
         </div>
     );
 };
