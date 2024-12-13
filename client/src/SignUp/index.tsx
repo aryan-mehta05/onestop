@@ -56,45 +56,53 @@ export default function SignUp() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
+        <div className="flex">
             <Nav />
-            <HeaderLogo/>
-            <h1 className="text-3xl mb-4">Sign Up</h1>
-            <form className="flex flex-col space-y-4">
-                <input
-                    type="text"
-                    placeholder="Username"
-                    defaultValue={credentials.username}
-                    onChange={(event) => setCredentials({ ...credentials, username: event.target.value })}
-                    className="border px-4 py-2 rounded"
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    defaultValue={credentials.password}
-                    onChange={(event) => setCredentials({ ...credentials, password: event.target.value })}
-                    className="border px-4 py-2 rounded"
-                />
-                <select
-                    onChange={(event) => setCredentials({ ...credentials, role: event.target.value })}
-                    className="border px-4 py-2 rounded"
-                >
-                    <option value="Guest">Guest</option>
-                    <option value="User">User</option>
-                    <option value="Admin">Admin</option>
-                </select>
-                {errorMsg && <p className="text-red-500">{errorMsg}</p>}
-                <button onClick={signup}>
-                    Sign Up
-                </button>
-                <button onClick={() => navigate("/signin")} >
-                    Have an account already? Sign In!
-                </button>
-                <button onClick={() => navigate("/")} >
-                    Back to the Home Screen
-                </button>
-            </form>
-            <div>hello {currentUser.username}</div>
+            <HeaderLogo />
+            <div className="post-list">
+                <div className="card post-card">
+                    <h1 className="mb-4 text-center">Sign Up</h1>
+                    <form className="">
+                        <div className="text-center">
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                defaultValue={credentials.username}
+                                onChange={(event) => setCredentials({ ...credentials, username: event.target.value })}
+                                className="border px-4 py-2 rounded"
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                defaultValue={credentials.password}
+                                onChange={(event) => setCredentials({ ...credentials, password: event.target.value })}
+                                className="border px-4 py-2 rounded"
+                            />
+                            <select
+                                onChange={(event) => setCredentials({ ...credentials, role: event.target.value })}
+                                className="border px-4 py-2 rounded"
+                            >
+                                <option value="Guest">Guest</option>
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                            {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+                        </div>
+                        <div>
+                            <button className="btn btn-primary mx-4 my-2" onClick={signup}>
+                                Sign Up
+                            </button>
+                            <button className="btn mx-4 my-2 float-end" onClick={() => navigate("/signin")} >
+                                Have an account already? Sign In!
+                            </button>
+                            <button className="btn btn-secondary mx-4 mb-2 float-end" onClick={() => navigate("/")} >
+                                Back to the Home Screen
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
     );
 }
