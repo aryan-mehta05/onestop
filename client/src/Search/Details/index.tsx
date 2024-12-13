@@ -4,6 +4,7 @@ import * as searchClient from "../client"
 import Nav from "../../Nav/index";
 import { useSelector } from "react-redux";
 import HeaderLogo from "../../Home/HeaderLogo";
+import { Link } from "react-router-dom";
 
 export default function SearchDetails() {
     const { currentUser } = useSelector((state: any) => state.userReducer);
@@ -41,22 +42,24 @@ export default function SearchDetails() {
         <div>
             <Nav />
             <HeaderLogo />
-            <h1>Search Results</h1>
-            {locationData && locationData != -1 &&<h2>{JSON.stringify(locationData.address.cityName)}</h2>}
-            {locationData && locationData != -1 && <h2>{JSON.stringify(locationData.address.countryName)}</h2>}
-            <br />
-            <ul>
-                {posts && posts.map((object: any) => (
-                    <div>
-                        <li className="border">
-                            {/* <div>{object.photo}</div> */}
-                            <div>{object.destinationCity}, {object.destinationCountry}</div>
-                            <div>{object.caption}</div>
-                            <div>{object.poster}</div>
-                            <br />
-                        </li>
-                    </div>
-                ))}
+            {locationData && <h3>Here are some recent posts related to {locationData.address.cityName}, {locationData.address.countryName}</h3>}
+            <ul className="post-list list-group">
+                {posts && posts.map((post: any) => {
+                    const imageData = "data:image/png;base64," + String.fromCharCode(...post.photo.data);
+                    return (
+                        <div className="">
+                            <li className="post-card card m-2 ">
+                                {<img src={imageData} alt={post.destinationCountry} className="m-4" />}
+                                <div className="card-body">
+                                    <div><b>{post.destinationCity}, {post.destinationCountry}</b></div>
+                                    <div>{post.caption}</div>
+                                    <Link to={`/profile/${post.poster}`} className="">{post.poster}</Link>
+                                    <br />
+                                </div>
+                            </li>
+                        </div>
+                    )
+                })}
             </ul>
         </div>
     )
