@@ -54,7 +54,7 @@ export default function Profile() {
             {Object.keys(currentUser).length > 0 && profileUsername && profileUser && !userFriends.includes(profileUser._id) && <button onClick={(() => { followFriend() })}>Follow</button>}
             {Object.keys(currentUser).length > 0 && profileUsername && profileUser && userFriends.includes(profileUser._id) && <div>Followed!</div>}
 
-            <div className="flex w-full h-screen">
+            <div className="flex">
                 <ProfileInfo profileUsername={profileUsername as string} />
                 <ProfilePosts profileUsername={profileUsername as string} />
                 <ProfileFriends profileUsername={profileUsername as string} />
