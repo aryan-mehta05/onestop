@@ -2,6 +2,7 @@ import { useState } from "react";
 import * as client from "./client";
 import { useSelector } from "react-redux";
 import Nav from "../Nav/index";
+import { Link } from "react-router-dom";
 
 export default function Search() {
     const [search_params, setSearch_params] = useState({ origin: "MAD", one_way: false, nonstop: false, max_price: 999999 });
@@ -76,9 +77,7 @@ export default function Search() {
                             <div>Departure Date: {object.departureDate}</div>
                             <div>Return Date: {object.returnDate}</div>
                             {object && object.price && <div>Price: {JSON.stringify(object.price.total, null, 2)}</div>}
-                            <a href={`/details/${object.destination}`}>
-                                <button>Get More Inspiration!</button>
-                            </a>
+                            <Link to={`/details/${object.destination}`}><button>Get More Inspiration!</button></Link>
                             <br /><br />
                         </li>
                     </div>
@@ -101,9 +100,7 @@ export default function Search() {
                             <div>Departure Date: {object.departureDate}</div>
                             <div>Return Date: {object.returnDate}</div>
                             {object && object.price && <div>Price: {JSON.stringify(object.price, null, 2)}</div>}
-                            <a href={`/details/${object.destination}`}>
-                                <button >Get More Inspiration!</button>
-                            </a>
+                            <Link to={`/details/${object.destination}`}><button>Get More Inspiration!</button></Link>
                             <br /><br />
                         </li>
                     </div>

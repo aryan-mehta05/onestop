@@ -11,7 +11,7 @@ const axiosWithCredentials = axios.create({ withCredentials: true });
 
 export const get_token = async () => {
     const data = { 'grant_type': "client_credentials", 'client_id': API_KEY, 'client_secret': API_SECRET };
-    const resp = await axiosWithCredentials.post(AUTH_API, qs.stringify(data));
+    const resp = await axios.post(AUTH_API, qs.stringify(data));
     const token = resp.data.access_token;
     return token;
 }
@@ -22,14 +22,14 @@ export const get_flight_inspo_data = async (origin: string, one_way: boolean, no
     const nonstop_string = JSON.stringify(nonstop)
     const max_price_string = JSON.stringify(max_price)
     const API_url = `${BASE_API}/shopping/flight-destinations?origin=${origin}&oneWay=${one_way_string}&nonStop=${nonstop_string}&maxPrice=${max_price ? max_price_string : "999999"}`
-    const { data } = await axiosWithCredentials.get(API_url, { headers: { 'Authorization': `Bearer ${token}` } });
+    const { data } = await axios.get(API_url, { headers: { 'Authorization': `Bearer ${token}` } });
     return data;
 }
 
 export const get_airport_city_details = async (airport_code: string) => {
     const token = await get_token();
     const API_url = `${BASE_API}/reference-data/locations?subType=CITY,AIRPORT&keyword=${airport_code}&sort=analytics.travelers.score&view=LIGHT`
-    const { data } = await axiosWithCredentials.get(API_url, { headers: { 'Authorization': `Bearer ${token}` } });
+    const { data } = await axios.get(API_url, { headers: { 'Authorization': `Bearer ${token}` } });
     if (data.data.length > 0) {
         return data.data
     } else {

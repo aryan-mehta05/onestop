@@ -12,7 +12,7 @@ export default function SearchDetails() {
     const getLocationAndRelatedPosts = async () => {
         const cityData = await getCityFromAirportCode();
         // await findRelatedPostsByCity(cityData.name);
-        await findRelatedPostsByCityAndCountry(cityData.name, cityData.address.countryName)
+        await findRelatedPostsByCityAndCountry(cityData.address.cityName, cityData.address.countryName)
     }
     const getCityFromAirportCode = async () => {
         if (airportCode) {
@@ -40,8 +40,8 @@ export default function SearchDetails() {
         <div>
             <Nav />
             <h1>Search Results</h1>
-            {locationData && locationData != -1 &&<h2>JSON.stringify(locationData.name)</h2>}
-            {locationData && locationData != -1 && <h2>JSON.stringify(locationData.address.countryName)</h2>}
+            {locationData && locationData != -1 &&<h2>{JSON.stringify(locationData.address.cityName)}</h2>}
+            {locationData && locationData != -1 && <h2>{JSON.stringify(locationData.address.countryName)}</h2>}
             <br />
             <ul>
                 {posts && posts.map((object: any) => (
