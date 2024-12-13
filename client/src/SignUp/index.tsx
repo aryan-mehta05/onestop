@@ -76,7 +76,7 @@ export default function SignUp() {
                                 placeholder="Password"
                                 defaultValue={credentials.password}
                                 onChange={(event) => setCredentials({ ...credentials, password: event.target.value })}
-                                className="border px-4 py-2 rounded"
+                                className="border px-4 py-2 rounded m-2"
                             />
                             <select
                                 onChange={(event) => setCredentials({ ...credentials, role: event.target.value })}

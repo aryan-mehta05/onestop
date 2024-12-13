@@ -3,6 +3,7 @@ import * as client from "./client";
 import { useSelector } from "react-redux";
 import Nav from "../Nav/index";
 import { Link } from "react-router-dom";
+import HeaderLogo from "../Home/HeaderLogo";
 
 export default function Search() {
     const [search_params, setSearch_params] = useState({ origin: "MAD", one_way: false, nonstop: false, max_price: 999999 });
@@ -39,73 +40,81 @@ export default function Search() {
         setHistory(response)
     }
     return (
-        <div>
-            {/* <h1>{auth.user ? auth.user.loginId : 'No User!'}</h1> */}
+        <div className="">
             <Nav />
-            <h1>Search</h1>
-            <h2>hello {currentUser.username}</h2>
-            <form action="">
-                <label htmlFor="origin-input">Origin: </label>
-                <input id="origin-input" type="text" onChange={(e) => setSearch_params({ ...search_params, origin: e.target.value })} />
-                <br />
-                <label htmlFor="one-way-input">One Way? </label>
-                <input id="one-way-input" type="checkbox" onChange={(e) => setSearch_params({ ...search_params, one_way: !search_params.one_way })} />
-                <br />
-                <label htmlFor="nonstop-input">Nonstop?</label>
-                <input id="nonstop-input" type="checkbox" onChange={(e) => setSearch_params({ ...search_params, nonstop: !search_params.nonstop })} />
-                <br />
-                <label htmlFor="max-price-input">Max Price (optional): </label>
-                <input id="max-price-input" type="number" onChange={(e) => setSearch_params({ ...search_params, max_price: parseInt(e.target.value) })} />
-                <br /><br />
-                <button onClick={(e) => {
-                    e.preventDefault();
-                    if (!search_params.origin) {
-                        alert("Please select an origin.")
-                    } else {
-                        getFlightData(search_params.origin, search_params.one_way, search_params.nonstop, search_params.max_price)
-                    }
-                }
-                }>Get Flight Inspiration</button>
-                <br /><br />
-            </form>
-            <ul>
-                {data_loaded && data.map((object: any) => (
-                    <div>
-                        <li className="border">
-                            <div>Origin: {object.origin}</div>
-                            <div>Destination: {object.destination}</div>
-                            <div>Departure Date: {object.departureDate}</div>
-                            <div>Return Date: {object.returnDate}</div>
-                            {object && object.price && <div>Price: {JSON.stringify(object.price.total, null, 2)}</div>}
-                            <Link to={`/details/${object.destination}`}><button>Get More Inspiration!</button></Link>
-                            <br /><br />
-                        </li>
-                    </div>
-                ))}
-            </ul>
-            <button onClick={(e) => {
-                e.preventDefault();
-                getAllSearchHistory();
-            }}>
-                Search Result History
-            </button>
-            <br /><br />
-            <h1>{history.length != 0 && "Past Search Results"}</h1>
-            <ul>
-                {history.length != 0 && history.map((object: any) => (
-                    <div>
-                        <li className="border">
-                            <div>Origin: {object.origin}</div>
-                            <div>Destination: {object.destination}</div>
-                            <div>Departure Date: {object.departureDate}</div>
-                            <div>Return Date: {object.returnDate}</div>
-                            {object && object.price && <div>Price: {JSON.stringify(object.price, null, 2)}</div>}
-                            <Link to={`/details/${object.destination}`}><button>Get More Inspiration!</button></Link>
-                            <br /><br />
-                        </li>
-                    </div>
-                ))}
-            </ul>
+            <HeaderLogo />
+            <div className="post-list">
+                <div className="card post-card p-4 mb-4 ms-4">
+                    <h1>Search</h1>
+                    <form>
+                        <label className="form-label" htmlFor="origin-input">Origin: </label>
+                        <input className="border px-2 rounded ms-2" id="origin-input" type="text" onChange={(e) => setSearch_params({ ...search_params, origin: e.target.value })} />
+                        <br />
+                        <label className="form-label" htmlFor="one-way-input">One Way? </label>
+                        <input className="mx-2" id="one-way-input" type="checkbox" onChange={(e) => setSearch_params({ ...search_params, one_way: !search_params.one_way })} />
+                        <br />
+                        <label className="form-label" htmlFor="nonstop-input">Nonstop?</label>
+                        <input className="mx-2" id="nonstop-input" type="checkbox" onChange={(e) => setSearch_params({ ...search_params, nonstop: !search_params.nonstop })} />
+                        <br />
+                        <label htmlFor="max-price-input">Max Price (optional): </label>
+                        <input className="border px-2 rounded ms-2" id="max-price-input" type="number" onChange={(e) => setSearch_params({ ...search_params, max_price: parseInt(e.target.value) })} />
+                        <br /><br />
+                        <button className="btn btn-primary" onClick={(e) => {
+                            e.preventDefault();
+                            if (!search_params.origin) {
+                                alert("Please select an origin.")
+                            } else {
+                                getFlightData(search_params.origin, search_params.one_way, search_params.nonstop, search_params.max_price)
+                            }
+                        }
+                        }>
+                            Get Flight Inspiration
+                        </button>
+                        <button className="btn btn-secondary float-end" onClick={(e) => {
+                            e.preventDefault();
+                            getAllSearchHistory();
+                        }}>
+                            Search Result History
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div className="post-list">
+                <ul>
+                    {data_loaded && data.map((object: any) => (
+                        <div className="card post-card p-2 mb-2">
+                            <li className="">
+                                <div>Origin: <b>{object.origin}</b></div>
+                                <div>Destination: <b>{object.destination}</b></div>
+                                <div>Departure Date: <b>{object.departureDate}</b></div>
+                                <div>Return Date: <b>{object.returnDate}</b></div>
+                                {object && object.price && <div>Price: <b>{object.price.total}</b></div>}
+                                <Link className="float-end me-2" to={`/details/${object.destination}`}><button>Get More Inspiration!</button></Link>
+                            </li>
+                        </div>
+                    ))}
+                </ul>
+            </div>
+
+            <div className="post-list">
+                {/* <h1>{history.length != 0 && "Past Search Results"}</h1> */}
+                <ul className="">
+                    {history.length != 0 && history.map((object: any) => (
+                        <div className="card post-card p-2 mb-2">
+                            <li className="list-group-item">
+                                <div>Origin: <b>{object.origin}</b></div>
+                                <div>Destination: <b>{object.destination}</b></div>
+                                <div>Departure Date: <b>{object.departureDate.substring(0, 10)}</b></div>
+                                <div>Return Date: <b>{object.returnDate.substring(0, 10)}</b></div>
+                                {object && object.price && <div>Price: <b>{object.price}</b></div>}
+                                <Link className="float-end me-2" to={`/details/${object.destination}`}><button>Get More Inspiration!</button></Link>
+                            </li>
+                        </div>
+                    ))}
+                </ul>
+            </div>
+
         </div>
     )
 }
