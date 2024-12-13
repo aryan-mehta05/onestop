@@ -70,8 +70,6 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
     }, [posts]);
     return (
         <div className="w-6">
-            {/* <h2 className="">Take a Look at Where You've Been</h2>
-            <br /> */}
             <ul className="post-list list-group">
                 {posts && posts.length > 0 && posts.map((post: any) => {
                     const imageData = "data:image/png;base64," + String.fromCharCode(...post.photo.data);
@@ -82,14 +80,22 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
 
                             {<img src={imageData} alt={post.destinationCountry} className="m-4" />}
                             <div className="card-body">
-                                <div className="m-2">{post.poster}</div>
-                                {!editing ? <div className="m-4">{post.caption}</div> : <div><textarea id="caption" value={newCaption} onChange={handleCaptionChange} /></div>}
-                                {!editing ? <div className="m-4"><b>{post.destinationCity}, {post.destinationCountry}</b></div> : <div><input id="destinationCity" value={newDestinationCity} onChange={handleDestinationCityChange} />, <input id="destinationCountry" value={newDestinationCountry} onChange={handleDestinationCountryChange} /></div>}
-                                {Object.keys(currentUser).length > 0 && !userLikes.includes(post._id) && <button className="like-post-button btn btn-primary" onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
-                                {Object.keys(currentUser).length > 0 && userLikes.includes(post._id) && <div className="">Liked!</div>}
-                                {<div className="mx-4 my-2">{likeCount === undefined ? "Loading..." : `Likes: ${likeCount.length}`}</div>}
+                                <div className="mb-2">{post.poster}</div>
+                                {!editing ? <div className="mx-2">{post.caption}</div> : <textarea className="post-caption-edit form-control" rows={10} cols={50} id="caption" value={newCaption} onChange={handleCaptionChange} />}
+                                {!editing ? <div className="mx-2"><b>{post.destinationCity}, {post.destinationCountry}</b></div> :
+                                    <div>
+                                        <label className="form-label mt-2" htmlFor="destinationCity">City:</label>
+                                        <input className="form-control " id="destinationCity" value={newDestinationCity} onChange={handleDestinationCityChange} />
+                                        <label className="form-label mt-2" htmlFor="destinationCountry">Country:</label>
+                                        <input className="form-control" id="destinationCountry" value={newDestinationCountry} onChange={handleDestinationCountryChange} />
+                                    </div>}
+                                {<div className="m-2">{likeCount === undefined ? "Loading..." : `Likes: ${likeCount.length}`}</div>}
+                                {Object.keys(currentUser).length > 0 && !userLikes.includes(post._id) && <button className="like-post-button btn btn-primary ms-2" onClick={(() => { likePost(post._id, currentUser._id) })}>Like</button>}
+                                {Object.keys(currentUser).length > 0 && userLikes.includes(post._id) && <div className="ms-2 btn btn-outline-primary">Liked!</div>}
+                                {(currentUser.role === "Admin" || currentUser.username == post.poster) && !editing && <button className="delete-post-button btn btn-danger float-end" onClick={(() => deletePost(post._id))}>
+                                    Delete</button>}
                                 {(currentUser.username == post.poster) && !editing ?
-                                    <button className="edit-post-button btn btn-warning" onClick={(() => {
+                                    <button className="edit-post-button btn btn-warning float-end mx-2" onClick={(() => {
                                         setNewCaption(post.caption);
                                         setNewDestinationCity(post.destinationCity);
                                         setNewDestinationCountry(post.destinationCountry);
@@ -97,7 +103,10 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
                                         setEditing(true);
                                     })}>Edit</button>
                                     :
-                                    <button className="update-post-button btn btn-success" onClick={(() => {
+                                    <span></span>
+                                }
+                                {editing ?
+                                    <button className="update-post-button btn btn-success float-end mx-2" onClick={(() => {
                                         setPosts(posts.filter(async (p: any) => {
                                             if (p._id !== post._id) {
                                                 return p;
@@ -118,9 +127,8 @@ export default function ProfilePosts(profileUsername?: { profileUsername: any; }
                                             return p;
                                         }));
                                     })}>Update</button>
+                                    : <div></div>
                                 }
-                                {(currentUser.role === "Admin" || currentUser.username == post.poster) && <button className="delete-post-button btn btn-danger" onClick={(() => deletePost(post._id))}>
-                                    Delete</button>}
                             </div>
                         </li>
                     )
